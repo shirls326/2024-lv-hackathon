@@ -58,6 +58,7 @@ function SignUp() {
 
 
 
+
   return (
     <div data-theme={theme} className='flex justify-between items-center max-h-screen w-screen bg-white'>
       <img alt="bruh" src={GradientSVG} className='h-screen w-auto'></img>
@@ -67,14 +68,14 @@ function SignUp() {
           <div className=''>
             <h3>First Name</h3>
             <label className="input input-bordered flex items-center gap-2">
-              <input type="text" className="grow" placeholder="John" onChange={} />
+              <input type="text" className="grow" placeholder="John" onChange={handleFirstNameChange} />
             </label>
           </div>
 
           <div>
             <h3>Last Name</h3>
             <label className="input input-bordered flex items-center gap-2">
-              <input type="text" className="grow" placeholder="Doe" />
+              <input type="text" className="grow" placeholder="Doe" onChange={handleLastNameChange} />
             </label>
           </div>
         </div>
@@ -82,28 +83,28 @@ function SignUp() {
         <div>
           <h3>Email</h3>
           <label className="input input-bordered flex items-center gap-2">
-            <input type="text" className="grow" placeholder="Email" />
+            <input type="text" className="grow" placeholder="Email" onChange={handleEmailChange} />
           </label>
         </div>
 
         <div>
           <h3>Username</h3>
           <label className="input input-bordered flex items-center gap-2">
-            <input type="text" className="grow" placeholder="Username" />
+            <input type="text" className="grow" placeholder="Username" onChange={handleUserNameChange} />
           </label>
         </div>
 
         <div>
           <h3>Password</h3>
           <label className="input input-bordered flex items-center gap-2">
-            <input type="text" className="grow" placeholder="Password" />
+            <input type="text" className="grow" placeholder="Password" onChange={handlePasswordChange} />
           </label>
         </div>
         
         <div>
           <h3>University</h3>
           <label className="input input-bordered flex items-center gap-2">
-            <input type="password" className="grow" placeholder="University" />
+            <input type="password" className="grow" placeholder="University" onChange={handleUniChange} />
           </label>
         </div>
       </div>
