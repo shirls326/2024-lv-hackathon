@@ -1,16 +1,41 @@
 .sidebar {
-    position: fixed;
+    position: sticky;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
-    height: 100%;
-    width: 288px;
-    z-index: 1;
+    /* justify-content: space-around; */
+    height: 90%;
+    width: 20vw;
+    /* z-index: 1;
     top: 0;
-    left: 0;
+    left: 0; */
     background-color: #E7F6F1;
-    overflow-y: hidden;
+    /* overflow-y: hidden; */
+    padding-top: 10vh;
+
+  
+}
+
+.sidebar.top {
+    padding-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 20%;
+    max-width: 100%;
+    justify-content: space-evenly;
+
+}
+
+.sidebar.bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 60%;
+    max-width: 100%;
+    padding-top: 0;
+    justify-content: space-evenly;
+
 }
 
 .sidebar > h2 {
@@ -25,13 +50,13 @@
 }
 
 .sidebar > button {
-    width: 159px;
-    height: 44px;
+    width: 65%;
+    padding: 0 10px;
     flex-shrink: 0;
     background-color: #E7F6F1;
     color: #0D1321;
     text-align: center;
-    font-size: 8pt;
+    font-size: 9pt;
     font-style: normal;
     font-weight: 400;
     line-height: normal;

@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { auth, db } from '../../firebase/config';
 import { onValue, ref } from 'firebase/database';
-import NavBar from '../../components/navbar.jsx';
 import { onAuthStateChanged } from 'firebase/auth';
 
+
+// component imports
+import NavBar from '../../components/navbar.jsx';
+import Sidebar from '../../components/sidebar.jsx';
 function Listings() {
   const [products, setProducts] = useState([]);
 
@@ -37,6 +40,8 @@ function Listings() {
     <>
       <NavBar />
       <div className="listings Container">
+
+        <Sidebar />
 
         {products.map(product => (
           <div key={product.id} className="product">

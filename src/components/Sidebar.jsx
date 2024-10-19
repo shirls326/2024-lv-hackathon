@@ -4,18 +4,24 @@ import './Sidebar.css'
 function Sidebar() {
     return (
         <div className="sidebar">
-            <button>Saved Products</button>
-            <button>Sell Something</button>
+            <div className='sidebar top'>
+                <button>Saved Products</button>
+                <button>Sell Something</button>
+            </div>
             <hr style={{
                 color: 'black',
                 backgroundColor: 'black',
                 height: 1
             }} />
-            <h2>Categories</h2>
-            <button>Clothing</button>
-            <button>Furniture</button>
-            <button>Free Stuff</button>
-            <button>Kitchen</button>
+            <div className='sidebar bottom'>
+                <h2>Categories</h2>
+                <button>Clothing</button>
+                <button>Furniture</button>
+                <button>Free Stuff</button>
+                <button>Kitchen</button>
+
+            </div>
+          
         </div>
     )
 }
