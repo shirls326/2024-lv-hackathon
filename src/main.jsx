@@ -2,11 +2,11 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Landing from './pages/landing/Landing';
 
 // pages
 import Landing from './pages/landing/Landing';
 import Login from './pages/login/login';
+import Register from './pages/register/Register';
 import Listings from './pages/listings/Listings';
 import Product from './pages/product/Product';
 import NewProduct from './pages/newproduct/NewProduct';
@@ -21,6 +21,7 @@ createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path="/" element={<Landing />}/>
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/" element={<Landing />} />
         <Route path="/products" element={<Listings />} />
         <Route path="/products/:id" element={<Product />} />

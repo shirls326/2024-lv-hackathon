@@ -7,5 +7,8 @@ export default {
     extend: {},
   },
   plugins: [daisyui],
+  corePlugins: {
+    preflight: false,
+  },
 }
 
