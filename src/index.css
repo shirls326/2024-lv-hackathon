@@ -21,6 +21,10 @@
   --color4_5: #b8dce8;
 }
 
+* {
+  font-family: "niveau-grotesk", sans-serif;
+}
+
 a {
   font-weight: 500;
   color: #646cff;

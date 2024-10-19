@@ -1,16 +1,33 @@
+// React
 import React, { useEffect, useState } from 'react'
-import { db } from '../../firebase/config';
+import { useNavigate } from 'react-router';
+
+// Firebase
+import { auth, db } from '../../firebase/config';
 import { onValue, ref } from 'firebase/database';
+import { onAuthStateChanged } from 'firebase/auth';
+
+// Components
+import NavBar from '../../components/navbar.jsx';
 
 function Listings() {
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    fetchProducts();
+  useEffect(() => {// ensure user is logged in
+    onAuthStateChanged(auth, (user) => {
+      console.log(user);
+      if (user) {
+        setUserID(user.uid);
+        fetchProducts();
+      } else {
+        navigate('/login');
+      }
+    });
   }, []);
-  
+
   // fetch products from firebase
-  const fetchProducts = () => {;
+  const fetchProducts = () => {
     const productsRef = ref(db, 'products');
 
     onValue(productsRef, (snapshot) => {
@@ -25,8 +42,9 @@ function Listings() {
 
   return (
     <>
-      <h1>Listings</h1>
-      <div className="listings">
+      <NavBar />
+      <div className="listings Container">
+
         {products.map(product => (
           <div key={product.id} className="product">
             <h2>{product.name}</h2>
