@@ -1,5 +1,13 @@
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  * {
+    border-style: solid;
+    border-width: 0;
+  }
+}
 
 a {
   font-weight: 500;

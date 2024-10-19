@@ -76,8 +76,7 @@
 		font-size: 1.3em;
 		border-radius: 30px;
 		padding: 15px 40px;
-		border-width: 3px;
-		border-style: solid;
+		border: 3px solid #0e4151;
 		transition: background-color 0.3s ease-in-out;
 	}
 
