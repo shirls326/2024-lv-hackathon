@@ -1,6 +1,6 @@
 // src/pages/UploadPage.jsx
 import { useState } from 'react';
-import { s3 } from '../awsConfig'; // Make sure awsConfig is properly configured to include S3 details
+import { s3 } from '../../Config/awsConfig'; // Make sure awsConfig is properly configured to include S3 details
 
 const UploadPage = () => {
     const [selectedFile, setSelectedFile] = useState(null);

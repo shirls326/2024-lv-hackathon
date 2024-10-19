@@ -10,10 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.675.0",
     "aws-sdk": "^2.1691.0",
     "firebase": "^10.14.1",
+    "qrcode.react": "^4.0.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-qr-code": "^2.0.15",
     "react-router": "^6.27.0",
     "react-router-dom": "^6.27.0"
   },

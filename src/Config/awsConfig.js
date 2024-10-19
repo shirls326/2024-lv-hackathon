@@ -1,12 +1,11 @@
-import AWS from 'aws-sdk';
+import { S3Client } from "@aws-sdk/client-s3";
 
-AWS.config.update({
-    accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY,
-    secretAccessKey: process.env.REACT_APP_AWS_SECRET_KEY,
-    region: 'us-west-2',
+const s3 = new S3Client({
+    region: "us-west-2",
+    credentials: {
+        accessKeyId: import.meta.env.VITE_AWS_ACCESS_KEY,
+        secretAccessKey: import.meta.env.VITE_AWS_SECRET_KEY,
+    },
 });
 
-const s3 = new AWS.S3();
-const rekognition = new AWS.Rekognition();
-
-export { s3, rekognition };
+export { s3 };
