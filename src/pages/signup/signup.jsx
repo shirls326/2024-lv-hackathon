@@ -3,6 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import GradientSVG from '/login_gradient.svg?url';
 
 
+// eslint-disable-next-line react/prop-types
+const InputTitle = ({ children }) => {
+ return <h2 className='mb-[0.5rem] mt-[1rem] font-thin'>{children}</h2>
+}
+
 function SignUp() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -63,17 +68,17 @@ function SignUp() {
     <div data-theme={theme} className='flex justify-between items-center max-h-screen w-screen bg-white'>
       <img alt="bruh" src={GradientSVG} className='h-screen w-auto'></img>
       <div className='flex flex-col justify-center w-full h-screen mx-[7rem] gap-[0.5rem]'>
-        <h1 className='mx-auto'>Sign Up</h1>
+        <h1 className='mx-auto font-thin'>Sign Up</h1>
         <div className='flex flex-row justify-between'>
           <div className=''>
-            <h3>First Name</h3>
+            <InputTitle>First Name</InputTitle>
             <label className="input input-bordered flex items-center gap-2">
               <input type="text" className="grow" placeholder="John" onChange={handleFirstNameChange} />
             </label>
           </div>
 
           <div>
-            <h3>Last Name</h3>
+            <InputTitle>Last Name</InputTitle>
             <label className="input input-bordered flex items-center gap-2">
               <input type="text" className="grow" placeholder="Doe" onChange={handleLastNameChange} />
             </label>
@@ -81,28 +86,28 @@ function SignUp() {
         </div>
 
         <div>
-          <h3>Email</h3>
+          <InputTitle>Email</InputTitle>
           <label className="input input-bordered flex items-center gap-2">
             <input type="text" className="grow" placeholder="Email" onChange={handleEmailChange} />
           </label>
         </div>
 
         <div>
-          <h3>Username</h3>
+          <InputTitle>Username</InputTitle>
           <label className="input input-bordered flex items-center gap-2">
             <input type="text" className="grow" placeholder="Username" onChange={handleUserNameChange} />
           </label>
         </div>
 
         <div>
-          <h3>Password</h3>
+          <InputTitle>Password</InputTitle>
           <label className="input input-bordered flex items-center gap-2">
             <input type="text" className="grow" placeholder="Password" onChange={handlePasswordChange} />
           </label>
         </div>
         
         <div>
-          <h3>University</h3>
+          <InputTitle>University</InputTitle>
           <label className="input input-bordered flex items-center gap-2">
             <input type="password" className="grow" placeholder="University" onChange={handleUniChange} />
           </label>
