@@ -8,7 +8,7 @@ import GradientSVG from '/login_gradient.svg?url';
 
 // eslint-disable-next-line react/prop-types
 const InputTitle = ({ children }) => {
- return <h2 className='mb-[0.5rem] mt-[1rem] font-thin'>{children}</h2>
+ return <h2 className='mb-[0.2rem] mt-[1rem] font-thin'>{children}</h2>
 }
 
 function SignUp() {
@@ -118,47 +118,48 @@ function SignUp() {
         <div className='flex flex-row justify-between'>
           <div className=''>
             <InputTitle>First Name</InputTitle>
-            <label className="input input-bordered flex items-center gap-2">
-              <input type="text" className="grow" placeholder="John" onChange={handleFirstNameChange} />
+            <label className="input input-bordered flex items-center gap-2 border-2 border-[#717171] bg-[#f8f8f8]">
+              <input type="text" className="grow" onChange={handleFirstNameChange} />
             </label>
           </div>
 
           <div>
             <InputTitle>Last Name</InputTitle>
-            <label className="input input-bordered flex items-center gap-2">
-              <input type="text" className="grow" placeholder="Doe" onChange={handleLastNameChange} />
+            <label className="input input-bordered flex items-center gap-2 border-2 border-[#717171] bg-[#f8f8f8]">
+              <input type="text" className="grow" onChange={handleLastNameChange} />
             </label>
           </div>
         </div>
 
         <div>
           <InputTitle>Email</InputTitle>
-          <label className="input input-bordered flex items-center gap-2">
-            <input type="text" className="grow" placeholder="Email" onChange={handleEmailChange} />
+          <label className="input input-bordered flex items-center gap-2 border-2 border-[#717171] bg-[#f8f8f8]">
+            <input type="text" className="grow" onChange={handleEmailChange} />
           </label>
         </div>
 
         <div>
           <InputTitle>Username</InputTitle>
-          <label className="input input-bordered flex items-center gap-2">
-            <input type="text" className="grow" placeholder="Username" onChange={handleUserNameChange} />
+          <label className="input input-bordered flex items-center gap-2 border-2 border-[#717171] bg-[#f8f8f8]">
+            <input type="text" className="grow" onChange={handleUserNameChange} />
           </label>
         </div>
 
         <div>
           <InputTitle>Password</InputTitle>
-          <label className="input input-bordered flex items-center gap-2">
-            <input type="text" className="grow" placeholder="Password" onChange={handlePasswordChange} />
+          <label className="input input-bordered flex items-center gap-2 border-2 border-[#717171] bg-[#f8f8f8]">
+            <input type="text" className="grow" onChange={handlePasswordChange} />
           </label>
         </div>
 
         <div>
           <InputTitle>University</InputTitle>
-          <label className="input input-bordered flex items-center gap-2">
-            <input type="password" className="grow" placeholder="University" onChange={handleUniChange} />
+          <label className="input input-bordered flex items-center gap-2 border-2 border-[#717171] bg-[#f8f8f8]">
+            <input type="text" className="grow" onChange={handleUniChange} />
           </label>
         </div>
-        <button onClick={handleSignUp} className='btn btn-primary'>Sign Up</button>
+
+        <button onClick={handleSignUp} className='btn btn-success mt-3'>Sign Up</button>
       </div>
     </div>
   );
