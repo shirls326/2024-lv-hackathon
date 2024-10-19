@@ -3,7 +3,8 @@ import './Sidebar.css'
 
 function Sidebar() {
     return (
-        <div className="sidebar">
+        <div className='sidebar'>
+
             <div className='sidebar top'>
                 <button>Saved Listings</button>
                 <button>Creating Listing</button>

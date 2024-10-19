@@ -39,9 +39,9 @@ function Listings() {
   return (
     <>
       <NavBar />
-      <div className="listings Container">
+      <Sidebar />
+      {/* <div className="listings Container">
 
-        <Sidebar />
 
         {products.map(product => (
           <div key={product.id} className="product">
@@ -50,7 +50,7 @@ function Listings() {
             <p>{product.price}</p>
           </div>
         ))}
-      </div>
+      </div> */}
     </>
   )
 }
