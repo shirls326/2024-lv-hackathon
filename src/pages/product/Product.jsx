@@ -1,6 +1,6 @@
 // React
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 
 // Firebase
 import { auth, db } from '../../firebase/config';
@@ -10,6 +10,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 function Product() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const navigate = useNavigate();
 
   // ensure user is logged in
   useEffect(() => {
