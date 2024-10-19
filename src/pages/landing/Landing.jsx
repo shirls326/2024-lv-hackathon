@@ -1,4 +1,3 @@
-import React from 'react'
 import './Landing.css'
 import UniMartLogo from '../../assets/UniMart Logo.svg'
 import { useNavigate } from 'react-router'
@@ -17,7 +16,7 @@ function Landing() {
       <div className='right'>
         <div className='landingCard'>
           <h2>JOIN TODAY</h2>
-          <button className='createAccount' onClick={() => { navigate("register") }}>Create an Account</button>
+          <button className='createAccount' onClick={() => { navigate("signup") }}>Create an Account</button>
 
           <h4>ALREADY HAVE AN ACCOUNT?</h4>
           <button className='signIn' onClick={() => { navigate("login") }}>SIGN IN</button>
