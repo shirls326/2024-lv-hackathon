@@ -1,7 +1,7 @@
 .Container {
 	height: 100vh;
 	width: 100%;
-    color: #0D1321;
+    color: var(--dark);
 }
 
 .Container,
@@ -76,8 +76,8 @@
 		font-size: 1.3em;
 		border-radius: 30px;
 		padding: 15px 40px;
-		border-width: 3px;
-		border-style: solid;
+		color: var(--dark);
+		border: 3px solid var(--dark);
 		transition: background-color 0.3s ease-in-out;
 	}
 
