@@ -28,6 +28,8 @@ function Product() {
   const [product, setProduct] = useState(null);
   const [userID, setUserID] = useState();
   const [loading, setLoading] = useState(true);
+  const [theme, setTheme] = useState('light');
+  const [previewImg, setPreviewImg] = useState(null);
 
   // ensure user is logged in
   useEffect(() => {
@@ -50,9 +52,20 @@ function Product() {
     });
   }, [id]);
 
+  useEffect(() => {
+    if (product && product.images && product.images.length > 0) {
+      setPreviewImg(product.images[0]);
+    }
+  }, [product]);
+
   const handleReturnToProducts = (event) => {
     event.preventDefault();
     navigate('/products');
+  }
+
+  const handleChangeImgPreview = (event, index) => {
+    event.preventDefault();
+    setPreviewImg(product.images[index]);
   }
 
   if (!userID) {
@@ -63,7 +76,7 @@ function Product() {
   }
   if (product) {
     return (
-      <div className="container mx-auto p-6">
+      <div data-theme={theme} className="p-6 bg-white w-full h-screen box-border">
         {/* Close Button */}
         <div className="flex justify-end">
           <button className="btn btn-circle btn-outline" onClick={handleReturnToProducts} >✕</button>
@@ -73,7 +86,11 @@ function Product() {
           {/* Left Image Gallery */}
           <div className="flex flex-col gap-4">
             {product.images && product.images.map((img, index) => (
-              <div key={`Image #${index}`} className="w-24 h-24 border border-gray-300 rounded-lg overflow-hidden">
+              <div
+                key={`Image #${index}`}
+                className="w-24 h-24 border border-gray-300 rounded-lg overflow-hidden"
+                onClick={(event, index) => handleChangeImgPreview(index)}
+              >
                 <img
                   src={img}
                   alt={`Image #${index}`}
@@ -87,7 +104,7 @@ function Product() {
           <div className="flex-grow border border-gray-300 rounded-lg overflow-hidden">
             {product.images && product.images.length > 0 &&
               <img
-                src={product.images[0]}
+                src={previewImg}
                 alt="Main Product Image"
                 className="object-cover w-full h-full"
               />
@@ -95,7 +112,7 @@ function Product() {
           </div>
 
           {/* Product Details Section */}
-          <div className="flex flex-col w-full lg:w-1/3 p-4 bg-base-100 rounded-lg shadow-lg">
+          <div className="flex flex-col w-full lg:w-1/3 p-4 rounded-lg shadow-lg bg-[#E7F6F1]">
             {/* Product Title */}
             <h1 className="text-3xl font-bold">{capitalizeFirstLetterOfEachWord(product.name)}</h1>
 
