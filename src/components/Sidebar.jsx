@@ -5,16 +5,12 @@ function Sidebar() {
     return (
         <div className="sidebar">
             <div className='sidebar top'>
-                <button>Saved Products</button>
-                <button>Sell Something</button>
+                <button>Saved Listings</button>
+                <button>Creating Listing</button>
             </div>
-            <hr style={{
-                color: 'black',
-                backgroundColor: 'black',
-                height: 1
-            }} />
+            <hr />
+            <h2>Categories</h2>
             <div className='sidebar bottom'>
-                <h2>Categories</h2>
                 <button>Clothing</button>
                 <button>Furniture</button>
                 <button>Free Stuff</button>

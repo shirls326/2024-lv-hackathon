@@ -13,6 +13,16 @@
     /* overflow-y: hidden; */
     padding-top: 10vh;
 
+    
+    
+    hr {
+        color: #128AB1;
+        background-color: #128AB1;
+        height: 1.5px;
+        width: 90%;
+        border-style: solid;
+    }
+
   
 }
 
@@ -31,7 +41,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 60%;
+    height: 50%;
     max-width: 100%;
     padding-top: 0;
     justify-content: space-evenly;
@@ -56,14 +66,14 @@
     background-color: #E7F6F1;
     color: #0D1321;
     text-align: center;
-    font-size: 9pt;
+    font-size: 12pt;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
     text-transform: uppercase;
     font-family: "niveau-grotesk", sans-serif;
     border-radius: 30px;
-    padding: 15px 40px;
+    padding: 15px 20px;
     color: var(--dark);
     border: 5px solid #128AB1;
     transition: background-color 0.3s ease-in-out;
