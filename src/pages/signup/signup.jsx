@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+import { db } from '../../firebase/config';
+import { ref, set } from 'firebase/database';
 import GradientSVG from '/login_gradient.svg?url';
 
 
@@ -16,6 +19,7 @@ function SignUp() {
   const [password, setPassword] = useState('');
   const [uni, setUni] = useState('');
   const [theme, setTheme] = useState('light');
+  const navigate = useNavigate();
 
   // Handlers
   const handleFirstNameChange = (event) => {
@@ -61,8 +65,50 @@ function SignUp() {
     }
   }
 
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    
+    // ensure all fields have been filled
+    if (!(firstName && lastName && email && userName && password && uni)) {
+      console.error('Invalid input');
+      return;
+    }
 
+    try {
+      // user is signed up
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      
+      // save info in RTDB
+      const user = userCredential.user;
+      const usersRef = ref(db, 'users/' + user.uid);
+      await set(usersRef, {
+        email: user.email,
+        firstName,
+        lastName
+      });
 
+      navigate('/login');
+
+    } catch (error) {
+      console.error(error);
+
+      // switch on error code
+      switch (error.code) {
+        case 'auth/invalid-email':
+          console.error('Invalid email format.');
+          break;
+        case 'auth/weak-password':
+          console.error('Password is too weak. Please use at least 6 characters.');
+          break;
+        case 'auth/email-already-in-use':
+          console.error('Email is already in use. Please use a different email.');
+          break;
+        default:
+          console.error('Signup failed. Please try again later.');
+          break;
+      }
+    }
+  };
 
   return (
     <div data-theme={theme} className='flex justify-between items-center max-h-screen w-screen bg-white'>
@@ -105,13 +151,14 @@ function SignUp() {
             <input type="text" className="grow" placeholder="Password" onChange={handlePasswordChange} />
           </label>
         </div>
-        
+
         <div>
           <InputTitle>University</InputTitle>
           <label className="input input-bordered flex items-center gap-2">
             <input type="password" className="grow" placeholder="University" onChange={handleUniChange} />
           </label>
         </div>
+        <button onClick={handleSignUp} className='btn btn-primary'>Sign Up</button>
       </div>
     </div>
   );
