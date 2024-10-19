@@ -1,0 +1,110 @@
+.Container {
+	height: 100vh;
+	width: 100%;
+    color: var(--dark);
+}
+
+.Container,
+.Landing {
+	font-family: "niveau-grotesk", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+	display: flex;
+	background-image: url("../../assets/Landing Background.svg");
+	background-size: cover;
+
+	.left {
+		font-size: 3rem;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		width: 50%;
+		height: 100%;
+		.uni {
+			background: linear-gradient(
+				90deg,
+				var(--color3) 30%,
+				#53f895 50%,
+				#b9fda1 60%,
+				#f0ffa8 80%
+			);
+			background-clip: text;
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+	}
+	.right {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		width: 50%;
+		height: 100%;
+
+		.landingCard {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			width: 70%;
+			height: 80%;
+			border-radius: 20px;
+			background: rgba(255, 255, 255, 0.2);
+			border-radius: 16px;
+			box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+			backdrop-filter: blur(5px);
+			-webkit-backdrop-filter: blur(5px);
+			border: 1px solid rgba(255, 255, 255, 0.3);
+		}
+	}
+
+	.landingUniMartHeader {
+		text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+		font-size: 128px;
+		font-style: normal;
+		font-weight: 515;
+		/* line-height: normal; */
+	}
+
+	button {
+		text-transform: uppercase;
+		font-family: "niveau-grotesk", sans-serif;
+		/* font-weight: 400; */
+		font-style: normal;
+		/* background-color: var(--color3); */
+		font-size: 1.3em;
+		border-radius: 30px;
+		padding: 15px 40px;
+		color: var(--dark);
+		border: 3px solid var(--dark);
+		transition: background-color 0.3s ease-in-out;
+	}
+
+	button,
+	.createAccount {
+		background-color: var(--color1_5);
+	}
+
+	button:hover,
+	.createAccount:hover {
+		background-color: var(--color4_5);
+		cursor: pointer;
+	}
+
+	.createAccount {
+		background-color: var(--color3);
+	}
+
+	button,
+	.signIn {
+		background-color: var(--color2);
+	}
+
+	button:hover,
+	.signIn:hover {
+		background-color: var(--color2_5);
+		cursor: pointer;
+		transition: background-color 0.3s ease-in-out;
+	}
+}
