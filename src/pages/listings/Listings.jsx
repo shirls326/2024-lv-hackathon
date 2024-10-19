@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { db } from '../../firebase/config';
 import { onValue, ref } from 'firebase/database';
+import NavBar from '../../components/navbar.jsx';
 
 function Listings() {
   const [products, setProducts] = useState([]);
@@ -25,8 +26,10 @@ function Listings() {
 
   return (
     <>
+      <NavBar />
       <h1>Listings</h1>
-      <div className="listings">
+      <div className="listings Container">
+ 
         {products.map(product => (
           <div key={product.id} className="product">
             <h2>{product.name}</h2>
