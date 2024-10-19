@@ -3,12 +3,13 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Landing from './pages/landing/Landing';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter basename="/">
       <Routes>
-        <Route path="/" element={<>Hello!!</>}/>
+        <Route path="/" element={<Landing />}/>
         {/* EXAMPLES OF ROUTES (DON'T NEED TO USE THESE)
         <Route path='/' element={<>Hello!!!</>} />
         <Route path='/signup' element={<Signup />} />
