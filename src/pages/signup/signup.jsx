@@ -19,6 +19,7 @@ function SignUp() {
   const [password, setPassword] = useState('');
   const [uni, setUni] = useState('');
   const [theme, setTheme] = useState('light');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   // Handlers
@@ -67,7 +68,12 @@ function SignUp() {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    
+
+    if (email.split("@").pop() !== 'lehigh.edu') {
+      setError('Must be valid university email.');
+      return;
+    }
+
     // ensure all fields have been filled
     if (!(firstName && lastName && email && userName && password && uni)) {
       console.error('Invalid input');
@@ -95,15 +101,19 @@ function SignUp() {
       // switch on error code
       switch (error.code) {
         case 'auth/invalid-email':
+          setError('Invalid email format.');
           console.error('Invalid email format.');
           break;
         case 'auth/weak-password':
+          setError('Password is too weak. Please use at least 6 characters.');
           console.error('Password is too weak. Please use at least 6 characters.');
           break;
         case 'auth/email-already-in-use':
+          setError('Email is already in use. Please use a different email.');
           console.error('Email is already in use. Please use a different email.');
           break;
         default:
+          setError('Signup failed. Please try again later.')
           console.error('Signup failed. Please try again later.');
           break;
       }
