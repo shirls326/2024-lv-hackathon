@@ -87,7 +87,7 @@ function SignUp() {
         lastName
       });
 
-      navigate('/login');
+      navigate('/qr');
 
     } catch (error) {
       console.error(error);

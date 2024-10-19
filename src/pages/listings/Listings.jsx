@@ -20,7 +20,6 @@ function Listings() {
 
   // fetch products from firebase
   const fetchProducts = () => {
-    ;
     const productsRef = ref(db, 'products');
 
     onValue(productsRef, (snapshot) => {
