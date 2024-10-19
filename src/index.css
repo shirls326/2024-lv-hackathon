@@ -11,6 +11,13 @@
   --color4: #AFDFCE;
 }
 
+@layer base {
+  * {
+    border-style: solid;
+    border-width: 0;
+  }
+}
+
 a {
   font-weight: 500;
   color: #646cff;
