@@ -81,4 +81,9 @@
     color: var(--dark);
     border: 5px solid #128AB1;
     transition: background-color 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.sidebar > button:hover {
+    background-color: var(--color2_5);
 }
