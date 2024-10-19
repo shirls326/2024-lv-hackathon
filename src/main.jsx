@@ -3,12 +3,17 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Listings from './pages/listings/Listings';
+import Landing from './pages/landing/Landing';
+import NotFound from './pages/404/NotFound';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter basename="/">
       <Routes>
-        <Route path="/" element={<>Hello!!</>}/>
+        <Route path="/" element={<Landing />} />
+        <Route path="/listings" element={<Listings />} />
+        <Route path="*" element={<NotFound />} />
         {/* EXAMPLES OF ROUTES (DON'T NEED TO USE THESE)
         <Route path='/' element={<>Hello!!!</>} />
         <Route path='/signup' element={<Signup />} />
