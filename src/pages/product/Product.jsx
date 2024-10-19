@@ -76,7 +76,7 @@ function Product() {
   }
   if (product) {
     return (
-      <div data-theme={theme} className="p-6 bg-white w-full h-screen box-border">
+      <div data-theme={theme} className="p-6 bg-white w-full h-screen min-h-fit overflow-auto box-border">
         {/* Close Button */}
         <div className="flex justify-end">
           <button className="btn btn-circle btn-outline" onClick={handleReturnToProducts} >✕</button>
