@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import { db, auth } from '../../firebase/config';
@@ -76,6 +76,7 @@ function SignUp() {
 
     // ensure all fields have been filled
     if (!(firstName && lastName && email && userName && password && uni)) {
+      setError('Invalid input.');
       console.error('Invalid input');
       return;
     }
@@ -171,6 +172,13 @@ function SignUp() {
 
         <button onClick={handleSignUp} className='btn btn-success mt-3'>Sign Up</button>
       </div>
+      {error && error.length > 0 && 
+        <div className="toast toast-start">
+          <div className="alert alert-error">
+            <span>{error}</span>
+          </div>
+        </div>
+      }
     </div>
   );
 }

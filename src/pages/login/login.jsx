@@ -74,6 +74,14 @@ function Login() {
 
         <button onClick={handleLogin} className='btn btn-success mt-4'>Login</button>
       </div>
+
+      {error && error.length > 0 && 
+        <div className="toast toast-start">
+          <div className="alert alert-error">
+            <span>{error}</span>
+          </div>
+        </div>
+      }
     </div>
   );
 }
