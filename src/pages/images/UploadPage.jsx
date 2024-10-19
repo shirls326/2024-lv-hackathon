@@ -1,6 +1,6 @@
-// src/pages/UploadPage.jsx
 import { useState } from 'react';
-import { s3 } from '../../Config/awsConfig'; // Make sure awsConfig is properly configured to include S3 details
+import { s3 } from '../../Config/awsConfig';
+import { PutObjectCommand } from '@aws-sdk/client-s3';
 
 const UploadPage = () => {
     const [selectedFile, setSelectedFile] = useState(null);
@@ -9,14 +9,14 @@ const UploadPage = () => {
 
     const handleFileChange = (event) => {
         setSelectedFile(event.target.files[0]);
-        setUploadSuccess(false); // Reset upload success when a new file is selected
+        setUploadSuccess(false);
     };
 
     const handleUpload = async () => {
         if (!selectedFile) return;
 
         const params = {
-            Bucket: 'your-s3-bucket-name', // Replace with your actual S3 bucket name
+            Bucket: 'myimagestoragekd',
             Key: `uploads/${selectedFile.name}`,
             Body: selectedFile,
             ContentType: selectedFile.type,
@@ -25,7 +25,8 @@ const UploadPage = () => {
         setUploading(true);
 
         try {
-            await s3.upload(params).promise();
+            const command = new PutObjectCommand(params);
+            await s3.send(command);
             setUploading(false);
             setUploadSuccess(true);
             console.log('File uploaded successfully.');
