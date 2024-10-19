@@ -36,7 +36,6 @@ function Listings() {
   return (
     <>
       <NavBar />
-      <h1>Listings</h1>
       <div className="listings Container">
 
         {products.map(product => (

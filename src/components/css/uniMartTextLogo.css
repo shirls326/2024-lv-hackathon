@@ -3,6 +3,13 @@
     font-style: normal;
     font-weight: 515;
     font-family: "niveau-grotesk", sans-serif;
+    color: #0D1321;
+    span{
+        padding: 0;
+        margin: 0;
+
+    }
+    margin-right: 10px;
 
 
     .uni {

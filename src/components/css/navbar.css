@@ -3,19 +3,38 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
-    background-color: #f8f9fa;
+    
+    background-image: url("../../assets/Landing Background.svg");
+    background-position: center;
+    background-size: cover;
+    padding: 0.5em;
+
     max-height: 7vh;
     /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
 
     img{
-        max-height: 50%;
+        
+      
+        max-width: 30%;
     }
 
     .left{
+        width: 20%;
         display:flex;
+        justify-content: flex-start;
         align-items: center;
         font-size: 2.5rem;
+    }
+    .right{
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        justify-content: space-evenly;
+        width: 20%;
+        height: 100%;
+        img{
+            min-width: 90%;
+        }
     }
 }
 
