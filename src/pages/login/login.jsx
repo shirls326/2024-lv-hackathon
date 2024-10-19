@@ -2,6 +2,7 @@ import { useState } from 'react';
 import GradientSVG from '/login_gradient.svg?url';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router';
+import {auth} from '../../firebase/config';
 
 // eslint-disable-next-line react/prop-types
 const InputTitle = ({ children }) => {
