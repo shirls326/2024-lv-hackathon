@@ -12,7 +12,7 @@ function Login() {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate('/dashboard');
+      navigate('/products');
     } catch (error) {
       setError('');
       switch (error.code) {
