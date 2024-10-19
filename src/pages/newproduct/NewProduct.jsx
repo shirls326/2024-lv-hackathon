@@ -1,6 +1,10 @@
+// React
 import React, { useState } from 'react'
 import { db } from '../../firebase/config';
 import { push, ref, set } from 'firebase/database';
+
+// Components
+import Sidebar from '../../components/Sidebar';
 
 function NewProduct() {
   const [name, setName] = useState('');
@@ -31,6 +35,7 @@ function NewProduct() {
   }
 
   return (<>
+    <Sidebar />
     <h1>Create Product</h1>
     <input type="text" placeholder="Name" onChange={e => setName(e.target.value)} />
     <br />
