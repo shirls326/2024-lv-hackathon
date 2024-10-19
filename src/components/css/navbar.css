@@ -1,8 +1,11 @@
 .navBar{
+    position: fixed;
+    z-index: 999;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
     
     background-image: url("../../assets/Landing Background.svg");
     background-position: center;
