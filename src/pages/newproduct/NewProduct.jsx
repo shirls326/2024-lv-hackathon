@@ -1,15 +1,32 @@
 // React
-import React, { useState } from 'react'
-import { db } from '../../firebase/config';
+import React, { useEffect, useState } from 'react'
+
+// Firebase
+import { auth, db } from '../../firebase/config';
+import { onAuthStateChanged } from 'firebase/auth';
 import { push, ref, set } from 'firebase/database';
 
 // Components
 import Sidebar from '../../components/Sidebar';
+import { useNavigate } from 'react-router';
 
 function NewProduct() {
+  const [userID, setUserID] = useState('');
   const [name, setName] = useState('');
   const [desc, setDesc] = useState('');
   const [price, setPrice] = useState(-1.0);
+  const navigate = useNavigate();
+
+  // ensure user is logged in
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUserID(user.uid);
+      } else {
+        navigate('/login');
+      }
+    });
+  }, []);
 
   const handlePost = e => {
     e.preventDefault();

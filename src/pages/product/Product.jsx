@@ -1,11 +1,26 @@
-import { db } from '../../firebase/config';
-import { onValue, ref } from 'firebase/database';
+// React
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router';
+
+// Firebase
+import { auth, db } from '../../firebase/config';
+import { onValue, ref } from 'firebase/database';
+import { onAuthStateChanged } from 'firebase/auth';
 
 function Product() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+
+  // ensure user is logged in
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUserID(user.uid);
+      } else {
+        navigate('/login');
+      }
+    });
+  }, []);
 
   // fetch product data from firebase
   useEffect(() => {
