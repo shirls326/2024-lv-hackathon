@@ -1,9 +1,13 @@
 import React from 'react'
 
-function cardListing() {
+function cardListing({ imgSrc, title, price }) {
   return (
-    <div>cardListing</div>
+    <div className="product">
+      <img src={imgSrc} alt={title} />
+      <h2>{title}</h2>
+      <p>{price}</p>
+    </div>
   )
 }
 
-export default cardListing
+export default cardListing;
