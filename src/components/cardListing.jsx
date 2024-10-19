@@ -1,13 +1,20 @@
-import React from 'react'
+import React from 'react';
+import './css/cardListing.css';
 
-function cardListing({ imgSrc, title, price }) {
+function cardListing() {
   return (
-    <div className="product">
-      <img src={imgSrc} alt={title} />
-      <h2>{title}</h2>
-      <p>{price}</p>
+    <div className="ad-container">
+      <img 
+        src='../assets/react.svg'
+        alt="Kitchen Aid Mixer"
+        className="ad-image"
+      />
+      <div className="ad-overlay">
+        <h2>Kitchen Aid Mixer</h2>
+        <p className="ad-price">$25</p>
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default cardListing;

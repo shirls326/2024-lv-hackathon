@@ -1,0 +1,30 @@
+.ad-container {
+	position: relative;
+	width: 300px;
+	border-radius: 20px;
+	overflow: hidden;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.ad-image {
+	width: 100%;
+	height: auto;
+	object-fit: cover;
+}
+
+.ad-overlay {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: rgba(0, 0, 0, 0.6);
+	color: white;
+	padding: 10px;
+	text-align: center;
+}
+
+.ad-price {
+	color: #a8dcc1;
+	font-size: 24px;
+	margin-top: 10px;
+}
