@@ -2,20 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --light: #f5f5f5;
-  --dark: #0d1321;
-  --color1: #003B4A;
-  --color2: #C6D86D;
-  --color3: #128AB1;
-  --color4: #AFDFCE;
-}
-
 @layer base {
   * {
     border-style: solid;
     border-width: 0;
   }
+}
+
+:root {
+  --light: #f5f5f5;
+  --dark: #0d1321;
+  --color1: #003B4A;
+  --color1_5: #0e4151;
+  --color2: #C6D86D;
+  --color2_5: #eef4d4;
+  --color3: #128AB1;
+  --color4: #AFDFCE;
+  --color4_5: #b8dce8;
 }
 
 a {

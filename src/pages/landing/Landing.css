@@ -24,7 +24,7 @@
 		.uni {
 			background: linear-gradient(
 				90deg,
-				#128ab1 30%,
+				var(--color3) 30%,
 				#53f895 50%,
 				#b9fda1 60%,
 				#f0ffa8 80%
@@ -72,7 +72,7 @@
 		font-family: "niveau-grotesk", sans-serif;
 		/* font-weight: 400; */
 		font-style: normal;
-		/* background-color: #128AB1; */
+		/* background-color: var(--color3); */
 		font-size: 1.3em;
 		border-radius: 30px;
 		padding: 15px 40px;
@@ -83,27 +83,27 @@
 
 	button,
 	.createAccount {
-		background-color: #0e4151;
+		background-color: var(--color1_5);
 	}
 
 	button:hover,
 	.createAccount:hover {
-		background-color: #b8dce8;
+		background-color: var(--color4_5);
 		cursor: pointer;
 	}
 
 	.createAccount {
-		background-color: #128ab1;
+		background-color: var(--color3);
 	}
 
 	button,
 	.signIn {
-		background-color: #c6d86d;
+		background-color: var(--color2);
 	}
 
 	button:hover,
 	.signIn:hover {
-		background-color: #eef4d4;
+		background-color: var(--color2_5);
 		cursor: pointer;
 		transition: background-color 0.3s ease-in-out;
 	}
