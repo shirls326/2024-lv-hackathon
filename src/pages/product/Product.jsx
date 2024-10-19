@@ -1,9 +1,34 @@
-// N.B: This page is loaded for each product; it uses the :id route parameter to fetch the product data
-import React from 'react'
+import { db } from '../../firebase/config';
+import { onValue, ref } from 'firebase/database';
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router';
 
 function Product() {
+  const { id } = useParams();
+  const [product, setProduct] = useState(null);
+
+  // fetch product data from firebase
+  useEffect(() => {
+    const productRef = ref(db, `products/${id}`);
+    onValue(productRef, (snapshot) => {
+      const data = snapshot.val();
+      setProduct(data);
+    });
+  }, [id]);
+
   return (
-    <div>Product</div>
+    <>
+      {product ? (
+        <div className="product">
+          <h2>{product.name}</h2>
+          <p>{product.desc}</p>
+          <p>{product.price}</p>
+        </div>
+      ) : (
+        <h1>Error: Product not found</h1>
+      )
+      }
+    </>
   )
 }
 
