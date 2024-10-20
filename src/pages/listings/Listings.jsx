@@ -14,7 +14,7 @@ import CardListing from '../../components/cardListing.jsx';
 
 // component imports
 import NavBar from '../../components/navbar.jsx';
-import Sidebar from '../../components/sidebar.jsx';
+import Sidebar from '../../components/Sidebar.jsx';
 
 function Listings() {
   const [products, setProducts] = useState([]);

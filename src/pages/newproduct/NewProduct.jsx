@@ -7,8 +7,8 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { push, ref, set } from 'firebase/database';
 
 // Components
-import Sidebar from '../../components/sidebar.jsx';
 import NavBar from '../../components/navbar.jsx';
+import Sidebar from '../../components/Sidebar.jsx';
 import { useNavigate } from 'react-router';
 
 // AWS

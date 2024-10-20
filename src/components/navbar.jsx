@@ -6,8 +6,6 @@ import NotificationsIcon from '../assets/Notifications.svg'
 import MessagesIcon from '../assets/Messages.svg'
 import './css/navbar.css'
 
-
-
 function navbar() {
 return (
     <div className='navBar'>
