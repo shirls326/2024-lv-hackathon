@@ -87,7 +87,7 @@ function Profile() {
       <Sidebar/>
       <Navbar/>
 
-      <div className="pl-[20vw] pt-[9vh] !max-w-screen !h-screen box-border">
+      <div data-theme="light" className="pl-[20vw] pt-[9vh] !max-w-screen !h-screen box-border">
         {/* Profile Section */}
         <div className="h-[40%] box-border rounded-lg flex items-center justify-around bg-base-100">
           {/* Avatar Section */}
