@@ -1,14 +1,30 @@
-import { useState } from 'react';
+// UploadPage.jsx
+import { useState, useEffect } from 'react';
 import { s3 } from '../../Config/awsConfig';
 import { PutObjectCommand } from '@aws-sdk/client-s3';
-import DisplayResult from '../../Components/DisplayResult'; // Adjust the import path as needed
-
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import DisplayResult from '../../Components/DisplayResult';
 
 const UploadPage = () => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [uploading, setUploading] = useState(false);
     const [uploadSuccess, setUploadSuccess] = useState(false);
     const [checkResults, setCheckResults] = useState(false);
+    const [userUid, setUserUid] = useState(null);
+
+    useEffect(() => {
+        const auth = getAuth();
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUserUid(user.uid);
+            } else {
+                console.error('No user is currently signed in.');
+                // Redirect to login page or show a message
+            }
+        });
+
+        return () => unsubscribe();
+    }, []);
 
     const handleFileChange = (event) => {
         setSelectedFile(event.target.files[0]);
@@ -17,11 +33,11 @@ const UploadPage = () => {
     };
 
     const handleUpload = async () => {
-        if (!selectedFile) return;
+        if (!selectedFile || !userUid) return;
 
         const params = {
             Bucket: 'myimagestoragekd',
-            Key: `uploads/${selectedFile.name}`,
+            Key: `uploads/${userUid}/${selectedFile.name}`, // Use userUid in the file path
             Body: selectedFile,
             ContentType: selectedFile.type,
         };
