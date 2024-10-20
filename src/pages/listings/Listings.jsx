@@ -10,7 +10,7 @@ import './Listings.css';
 
 
 // components
-import CardListing from '../../components/cardListing.jsx';
+import CardListing from '../../components/cardListing';
 
 // component imports
 import Navbar from '../../components/Navbar';

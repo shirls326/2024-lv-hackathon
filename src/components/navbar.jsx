@@ -1,9 +1,9 @@
-import TextLogo from './uniMartTextLogo.jsx'
+import TextLogo from './uniMartTextLogo'
 import UniMartLogo from '../assets/UniMart Logo.svg'
 import ProfileIcon from '../assets/Profile.svg'
 import NotificationsIcon from '../assets/Notifications.svg'
 import MessagesIcon from '../assets/Messages.svg'
-import './css/navbar.css'
+import './css/Navbar.css'
 
 function Navbar() {
 return (

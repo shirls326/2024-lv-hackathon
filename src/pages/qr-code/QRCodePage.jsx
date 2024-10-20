@@ -1,5 +1,5 @@
 // QRCodePage.jsx
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ref, onValue } from 'firebase/database';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { db } from '../../firebase/config'; // Adjust the path as needed
