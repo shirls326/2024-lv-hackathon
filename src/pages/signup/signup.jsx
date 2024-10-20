@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, db } from '../../firebase/config';
 import { ref, set } from 'firebase/database';
-import GradientSVG from '/login_gradient.svg?url';
+import GradientSVG from '../../assets/login_gradient.svg';
 
 
 // eslint-disable-next-line react/prop-types

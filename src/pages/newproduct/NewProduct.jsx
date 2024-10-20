@@ -12,7 +12,8 @@ import Sidebar from '../../components/Sidebar';
 import { useNavigate } from 'react-router';
 import MultiSelectDropdown from './MultiSelectDropdown.jsx';
 import ConditionDropdown from './ConditionDropdown.jsx';
-import CameraSVG from '/camera.svg?url';
+import CameraSVG from '../../assets/camera.svg';
+import RedoSVG from '../../assets/redo.svg';
 
 // AWS
 import { PutObjectCommand } from '@aws-sdk/client-s3';
@@ -31,6 +32,7 @@ function NewProduct() {
   const [image, setImage] = useState(null);
   const [tags, setTags] = useState([]);
   const [submitting, setSubmitting] = useState(false);
+  const [condition, setCondition] = useState('');
   const navigate = useNavigate();
 
 
@@ -52,7 +54,7 @@ function NewProduct() {
     e.preventDefault();
     setSubmitting(true);
     // ensure all fields have been filled
-    if (name === '' || desc === '' || price < 0 || image === null || tags.length < 1) {
+    if (name === '' || desc === '' || price < 0 || image === null || tags.length < 1 || condition === '') {
       console.error("Invalid input");
       setError("All input fields required.");
       setSubmitting(false);
@@ -111,38 +113,60 @@ function NewProduct() {
       <div data-theme='light' className='newProductContainer pl-[calc(20vw+10rem)] pr-[10rem] pt-[calc(9vh+2rem)] pb-[7rem] !max-w-screen !h-screen !min-h-fit box-border overflow-y-auto'>
         {/* <h1>Create Product</h1> */}
         {/* Buttons */}
-        <h3>Upload Image*</h3>
-        <div className="flex space-x-4">
-          {/* Camera Button */}
-          <label className="btn btn-outline btn-square border-2 rounded-lg cursor-pointer">
-            <input
-              type="file"
-              accept="image/*"
-              className="hidden"
-              onChange={e => setImage(e.target.files[0])}
-            />
-            <img src={CameraSVG} className='h-full w-auto'></img>
-          </label>
+        <div className='flex flex-row justify-between'>
+          <div>
+            <h3>Upload Image*</h3>
+            <div className="flex space-x-4">
+              {/* Camera Button */}
+              {/* <label className="btn btn-outline btn-square border-2 rounded-lg cursor-pointer">
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={e => setImage(e.target.files[0])}
+                  disabled
+                />
+                <img src={CameraSVG} className='h-full w-auto'></img>
+              </label> */}
 
-          {/* Add Button with Dashed Border for file upload */}
-          <label className="btn btn-outline btn-square border-2 border-dashed rounded-lg cursor-pointer">
-            <input
-              type="file"
-              accept="image/*"
-              className="hidden"
-              onChange={e => setImage(e.target.files[0])}
-            />
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
-            </svg>
-          </label>
+              {image && 
+                <div className='w-[20vw] h-[20vh]'>
+                  <img src={URL.createObjectURL(image)} alt="given_image" className='max-w-full max-h-full object-cover rounded-lg'></img>
+                </div>
+              }
+
+              {/* Add Button with Dashed Border for file upload */}
+              <label className="btn btn-outline btn-square border-2 border-dashed rounded-lg cursor-pointer">
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={e => setImage(e.target.files[0])}
+                />
+                {image ?
+                  <img src={RedoSVG} className='w-[70%] max-w-full max-h-full'></img>
+                  :
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
+                  </svg>
+                }
+
+              </label>
+            </div>
+          </div>
+          <div className='flex flex-col items-end'>
+            <h3>Select Condition*</h3>
+            <ConditionDropdown selectedCondition={condition} setSelectedCondition={setCondition} />
+          </div>
         </div>
+
+
 
         <h3>Item Name*</h3>
         <label className="input input-bordered flex items-center gap-2 border-2 border-[#717171] bg-[#f8f8f8] h-[6vh] min-h-[6vh]">
