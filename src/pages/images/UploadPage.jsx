@@ -94,7 +94,7 @@ const UploadPage = () => {
   if (userVerified) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen p-4">
-        <h2 className="text-2xl font-bold text-center mb-4">You are already verified!</h2>
+        <h2 className="text-2xl font-bold text-center mb-4">You are verified!</h2>
         <p className="text-center mb-6">No need to upload your ID card again.</p>
         <p className="text-center text-green-500 font-semibold">Photo upload successful. You can close this window now!</p>
       </div>
