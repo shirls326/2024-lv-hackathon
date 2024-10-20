@@ -13,7 +13,7 @@ import './signup.css';
 
 // eslint-disable-next-line react/prop-types
 const InputTitle = ({ children }) => {
- return <h2 className='mb-[0.2rem] mt-[1rem] font-thin'>{children}</h2>
+  return <h2 className='mb-[0.2rem] mt-[1rem] font-thin'>{children}</h2>
 }
 
 function SignUp() {
@@ -89,6 +89,7 @@ function SignUp() {
       return;
     }
 
+    // ensure Lehigh email
     if (email.split("@").pop() !== 'lehigh.edu') {
       setError('Must be valid university email.');
       return;
@@ -97,7 +98,7 @@ function SignUp() {
     try {
       // user is signed up
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      
+
       // save info in RTDB
       const user = userCredential.user;
       const usersRef = ref(db, 'users/' + user.uid);
@@ -199,10 +200,13 @@ function SignUp() {
 
         <button onClick={handleSignUp} className='btn btn-success mt-3'>Sign Up</button>
       </div>
-      {error && error.length > 0 && 
+      {error && error.length > 0 &&
         <div className="toast toast-start">
-          <div className="alert alert-error">
+          <div className="alert alert-error flex justify-between items-center">
             <span>{error}</span>
+            <button className="btn btn-sm btn-ghost ml-4" onClick={() => setError('')}>
+              ✕
+            </button>
           </div>
         </div>
       }

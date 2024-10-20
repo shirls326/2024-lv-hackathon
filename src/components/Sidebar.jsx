@@ -20,7 +20,7 @@ function Sidebar({ setSelectedCategory }) {
     return (
         <div className='sidebar'>
             <div className='sidebar top'>
-                <button data-redirect="/profile" onClick={handleRedirect}>Saved Listings</button>
+                <button onClick={() => handleCategoryClick('Saved')}>Saved Listings</button>
                 <button data-redirect="/newproduct" onClick={handleRedirect}>Create Listing</button>
             </div>
             <hr />
@@ -37,7 +37,7 @@ function Sidebar({ setSelectedCategory }) {
 }
 
 Sidebar.propTypes = {
-    setSelectedCategory: PropTypes.func.isRequired, // Must be a function
+    setSelectedCategory: PropTypes.func.isRequired,
 };
 
 export default Sidebar;
