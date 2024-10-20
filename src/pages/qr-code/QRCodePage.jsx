@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { ref, onValue } from 'firebase/database';
 import { db } from '../../firebase/config'; // Adjust the path as needed
+import QRCode from 'react-qr-code'; // Import QRCode component
 
 const QRCodePage = () => {
     const [users, setUsers] = useState([]);
@@ -45,7 +46,7 @@ const QRCodePage = () => {
                             users.map(user => (
                                 <div key={user.uid} style={{ marginBottom: '20px' }}>
                                     <p>Status: Verified</p>
-                                    <p>User LIN: {user.LIN}</p>
+                                    <p>User LIN: {user.uniID}</p>
                                     {user.imageUrl && (
                                         <img src={user.imageUrl} alt="Uploaded ID Card" style={{ maxWidth: '100%', marginTop: '10px' }} />
                                     )}
