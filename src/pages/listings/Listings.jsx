@@ -3,10 +3,10 @@ import { auth, db } from '../../firebase/config';
 import { onValue, ref } from 'firebase/database';
 import { onAuthStateChanged } from 'firebase/auth';
 
-
 // component imports
 import NavBar from '../../components/navbar.jsx';
 import Sidebar from '../../components/sidebar.jsx';
+
 function Listings() {
   const [products, setProducts] = useState([]);
 
