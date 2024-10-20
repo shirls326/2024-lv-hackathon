@@ -24,7 +24,7 @@ createRoot(document.getElementById('root')).render(
     <BrowserRouter basename="/">
       <Routes>
         <Route path="/" element={<Landing />}/>
-        {/* <Route path="/" element={<QRCodeComponent />} /> */}
+        <Route path="/qr" element={<QRCodeComponent />} />
         <Route path="/upload" element={<UploadPage />} />
         <Route path="/result" element={<DisplayResultComponent />} />
         <Route path="/login" element={<Login />} />
