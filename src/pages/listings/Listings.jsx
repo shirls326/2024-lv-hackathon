@@ -68,6 +68,11 @@ function Listings() {
       setFilteredProducts(
         products.filter(product => userSavedListings.includes(product.id))
       );
+    } else if (selectedCategory === 'Free') {
+      // Filter to only show free listings
+      setFilteredProducts(
+        products.filter(product => product.price == 0)
+      );
     } else {
       // Filter products by the selected category
       setFilteredProducts(
@@ -79,7 +84,7 @@ function Listings() {
   return (
     <>
       <Navbar />
-      <Sidebar setSelectedCategory={setSelectedCategory} />
+      <Sidebar selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
       <div className="listings Container">
         <h1>RECENTLY ADDED</h1>
         <div className='listingsGrid'>

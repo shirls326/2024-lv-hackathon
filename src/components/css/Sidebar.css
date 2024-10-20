@@ -84,6 +84,10 @@
   cursor: pointer;
 }
 
-.sidebar > button:hover {
+.sidebar button:hover {
+  background-color: var(--color2_5);
+}
+
+.sidebar button.active {
   background-color: var(--color2_5);
 }

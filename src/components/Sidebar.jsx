@@ -13,8 +13,22 @@ function Sidebar({ setSelectedCategory }) {
         }
     };
 
-    const handleCategoryClick = (category) => {
-        setSelectedCategory(category);
+    const handleCategoryClick = (event) => {
+        if (event === 'Saved') {
+            setSelectedCategory('Saved');
+            return;
+        }
+
+        event.preventDefault();
+        const id = event.target.id;
+        setSelectedCategory(id);
+
+        // add active property
+        document.querySelectorAll('.sidebar button').forEach((button) => {
+            button.classList.remove('active');
+        });
+
+        event.target.classList.add('active');
     };
 
     return (
@@ -26,11 +40,11 @@ function Sidebar({ setSelectedCategory }) {
             <hr />
             <h2>Categories</h2>
             <div className='sidebar bottom'>
-                <button onClick={() => handleCategoryClick('Apparel')}>Clothing</button>
-                <button onClick={() => handleCategoryClick('Furniture')}>Furniture</button>
-                <button onClick={() => handleCategoryClick('Free Items')}>Free Stuff</button>
-                <button onClick={() => handleCategoryClick('Kitchen')}>Kitchen</button>
-                <button onClick={() => handleCategoryClick('All')}>All</button>
+                <button id='All' onClick={e => handleCategoryClick(e)}>All</button>
+                <button id='Free' onClick={e => handleCategoryClick(e)}>Free Stuff</button>
+                <button id='Apparel' onClick={e => handleCategoryClick(e)}>Clothing</button>
+                <button id='Furniture' onClick={e => handleCategoryClick(e)}>Furniture</button>
+                <button id='Kitchen' onClick={e => handleCategoryClick(e)}>Kitchen</button>
             </div>
         </div>
     );

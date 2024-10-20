@@ -91,7 +91,7 @@ function Profile() {
   }
   return (
     <>
-      <Sidebar setSelectedCategory={setSelectedCategory} />
+      <Sidebar selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
       <Navbar />
 
       <div data-theme="light" className="pl-[20vw] pt-[9vh] !max-w-screen !h-screen box-border">
