@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { s3 } from '../../Config/awsConfig';
 import { PutObjectCommand } from '@aws-sdk/client-s3';
 import DisplayResult from '../../Components/DisplayResult'; // Adjust the import path as needed

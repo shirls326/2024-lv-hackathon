@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth, db } from '../../firebase/Config';
+import { auth, db } from '../../firebase/config';
 import { ref, set } from 'firebase/database';
 import GradientSVG from '/login_gradient.svg?url';
 
