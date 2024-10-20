@@ -51,7 +51,7 @@ function Listings() {
       <NavBar />
       <Sidebar />
       <div className="listings Container">
-        <h1>New Listings!</h1>
+        <h1>RECENTLY ADDED</h1>
         <div className='listingsGrid'>
           <CardListing />
           <CardListing />
