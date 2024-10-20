@@ -77,15 +77,15 @@ function SignUp() {
   const handleSignUp = async (e) => {
     e.preventDefault();
 
-    if (email.split("@").pop() !== 'lehigh.edu') {
-      setError('Must be valid university email.');
+    // ensure all fields have been filled
+    if (!(firstName && lastName && email && userName && password && uni && uniID)) {
+      setError('All fields must be filled.');
+      console.error('All fields must be filled.');
       return;
     }
 
-    // ensure all fields have been filled
-    if (!(firstName && lastName && email && userName && password && uni)) {
-      setError('Invalid input.');
-      console.error('Invalid input');
+    if (email.split("@").pop() !== 'lehigh.edu') {
+      setError('Must be valid university email.');
       return;
     }
 
@@ -100,7 +100,8 @@ function SignUp() {
         email: user.email,
         firstName,
         lastName,
-        verfied: false
+        verfied: false,
+        uniID: uniID
       });
 
       navigate('/qr');
