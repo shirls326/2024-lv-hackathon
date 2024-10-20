@@ -2,7 +2,8 @@ import { useState } from 'react';
 import GradientSVG from '/login_gradient.svg?url';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router';
-import { auth } from '../../firebase/config';
+import { auth, db } from '../../firebase/config';
+import { get, ref } from 'firebase/database';
 
 // eslint-disable-next-line react/prop-types
 const InputTitle = ({ children }) => {
@@ -37,9 +38,23 @@ function Login() {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate('/products');
+
+      // fetch user data
+      const userRef = ref(db, `users/${auth.currentUser.uid}`);
+      const snapshot = await get(userRef);
+      const data = snapshot.val();
+      console.log(data);
+
+      // check if user is verified
+      if (data.verified) { 
+        navigate('/products');
+      } else {
+        navigate('/qr');
+      }
+
     } catch (error) {
       setError('');
+      console.error(error);
       switch (error.code) {
         case 'auth/user-not-found':
           setError('Account not found. Please check your email address.');
