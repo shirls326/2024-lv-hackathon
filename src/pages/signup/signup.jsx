@@ -101,7 +101,7 @@ function SignUp() {
         firstName,
         lastName,
         verfied: false,
-        uniID: String(uniID)
+        uniID: uniID
       });
 
       navigate('/qr');
