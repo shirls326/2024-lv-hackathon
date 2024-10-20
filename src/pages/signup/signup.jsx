@@ -18,7 +18,7 @@ function SignUp() {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [uni, setUni] = useState('');
-  const [uniID, setUniID] = useState();
+  const [uniID, setUniID] = useState('');
   const [theme, setTheme] = useState('light');
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -101,7 +101,7 @@ function SignUp() {
         firstName,
         lastName,
         verfied: false,
-        uniID: uniID
+        uniID: String(uniID)
       });
 
       navigate('/qr');
