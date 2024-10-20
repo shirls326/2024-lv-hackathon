@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router';
 import { auth, db } from '../../firebase/config';
 import { onValue, ref } from 'firebase/database';
 import { onAuthStateChanged } from 'firebase/auth';
-import './listings.css';
+import './Listings.css';
 
 
 // components
