@@ -4,6 +4,11 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, db } from '../../firebase/config';
 import { ref, set } from 'firebase/database';
 import GradientSVG from '../../assets/login_gradient.svg';
+import TextLogo from '../../components/uniMartTextLogo';
+import Logo from '../../assets/UniMart Logo.svg';
+
+import './signup.css';
+
 
 
 // eslint-disable-next-line react/prop-types
@@ -135,8 +140,11 @@ function SignUp() {
 
   return (
     <div data-theme={theme} className='flex justify-between items-center max-h-screen w-screen bg-white'>
-      <img alt="bruh" src={GradientSVG} className='h-screen w-auto'></img>
-      <div className='flex flex-col justify-center w-full h-screen mx-[7rem] gap-[0.5rem]'>
+      <div className='h-screen w-screen lg:w-3/5 flex flex-col justify-center items-center bg-[url("/src/assets/login_gradient.svg")] bg-cover bg-no-repeat'>        
+        <img src={Logo} alt='UniMart Logo' />
+        <TextLogo className = 'signUpLogo' />
+      </div>
+      <div className='flex flex-col justify-center w-full h-screen mx-[7rem] gap-[0.5rem] lg:w-2/5'>
         <h1 className='mx-auto font-thin'>Sign Up</h1>
         <div className='flex flex-row justify-between'>
           <div>
