@@ -5,8 +5,8 @@ import { auth, db } from '../../firebase/config';
 import { query, orderByChild, equalTo, ref, get } from "firebase/database";
 import { onAuthStateChanged } from 'firebase/auth';
 // Components
-import NavBar from '../../components/navbar.jsx';
-import Sidebar from '../../components/Sidebar.jsx';
+import Navbar from '../../components/Navbar';
+import Sidebar from '../../components/Sidebar';
 // Icon
 import EditSVG from '/edit_icon.svg?url';
 import LoadingSkeleton from '../../components/LoadingSkeleton';
@@ -85,7 +85,7 @@ function Profile() {
   return (
     <>
       <Sidebar/>
-      <NavBar/>
+      <Navbar/>
 
       <div className="pl-[20vw] pt-[9vh] !max-w-screen !h-screen box-border">
         {/* Profile Section */}

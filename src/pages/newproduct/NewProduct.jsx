@@ -7,8 +7,8 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { push, ref, set } from 'firebase/database';
 
 // Components
-import NavBar from '../../components/navbar.jsx';
-import Sidebar from '../../components/Sidebar.jsx';
+import Navbar from '../../components/Navbar';
+import Sidebar from '../../components/Sidebar';
 import { useNavigate } from 'react-router';
 
 // AWS
@@ -89,7 +89,7 @@ function NewProduct() {
 
   return (
     <>
-      <NavBar />
+      <Navbar />
       <Sidebar />
       <div className='newProductContainer'>
         <h3>Name</h3>

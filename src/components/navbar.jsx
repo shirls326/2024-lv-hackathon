@@ -1,4 +1,3 @@
-import React from 'react'
 import TextLogo from './uniMartTextLogo.jsx'
 import UniMartLogo from '../assets/UniMart Logo.svg'
 import ProfileIcon from '../assets/Profile.svg'
@@ -6,7 +5,7 @@ import NotificationsIcon from '../assets/Notifications.svg'
 import MessagesIcon from '../assets/Messages.svg'
 import './css/navbar.css'
 
-function navbar() {
+function Navbar() {
 return (
     <div className='navBar'>
             <div className='left'>
@@ -30,4 +29,4 @@ return (
 )
 }
 
-export default navbar
+export default Navbar;
