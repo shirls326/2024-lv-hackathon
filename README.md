@@ -18,7 +18,7 @@ UniMart is a university-only platform where students buy, sell, and donate items
 
 1. **Clone the repository:**
     ```bash
-    git clone https://github.com/yourusername/unimart.git
+    git clone https://github.com/jonklein2021/2024-lv-hackathon unimart
     cd unimart
     ```
 
