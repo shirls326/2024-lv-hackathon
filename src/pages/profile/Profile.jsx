@@ -59,7 +59,7 @@ function Profile() {
   }
 
   useEffect(() => {
-    // Listen to the auth state change
+    // Listen to the auth state change (REQUIRED, otherwise auth.currentUser is NULL)
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         console.log("User email", user.email);
@@ -101,29 +101,29 @@ function Profile() {
           
           {/* User Info */}
           <div className='flex flex-col gap-6'>
-            <div className="text-xl">
+            <div className="text-3xl">
               <span className="font-bold">Name: </span>{userData.firstName + " " + userData.lastName}
             </div>
-            <div className="text-xl">
+            <div className="text-3xl">
               <span className="font-bold">School: </span>{userData.university}
             </div>
-            <div className="text-xl">
+            <div className="text-3xl">
               <span className="font-bold">Email: </span>{userData.email}
             </div>
-            <div className="text-xl">
+            <div className="text-3xl">
               <span className="font-bold">Password: </span>******
             </div>
           </div>
 
           {/* Edit Icon */}
           <div className='flex flex-col h-full pt-5 box-border'>
-            <button className="btn btn-square btn-sm">
+            <button className="btn btn-square btn-sm" onClick={()=>document.getElementById('edit_profile_modal').showModal()}>
               <img src={EditSVG} />
             </button>
           </div>
         </div>
 
-        {/* Saved Drafts Section */}
+        {/* 'My Products' Section */}
         <div className=" h-[60%] box-border bg-base-200 p-2 rounded-lg">
           <h2 className="text-2xl font-semibold mb-4">My Products</h2>
           <div className="grid grid-cols-2 gap-4">
@@ -141,9 +141,58 @@ function Profile() {
             ))}
           </div>
         </div>
+
+        <EditProfileModal />
       </div>
     </>
   );
+}
+
+// eslint-disable-next-line react/prop-types
+const InputTitle = ({ children }) => {
+  return <h2 className='mb-[0.2rem] mt-[1rem] font-thin'>{children}</h2>
+}
+// eslint-disable-next-line react/prop-types
+const TextInput = ({ children }) => {
+  return <>
+    <InputTitle>{children}</InputTitle>
+    <label className="input input-bordered flex items-center gap-2 border-2 border-[#717171] bg-[#f8f8f8]">
+      <input type="text" className="grow"/>
+    </label>
+  </>
+}
+
+function EditProfileModal () {
+  return <>
+    <button className="btn" ></button>
+    <dialog id="edit_profile_modal" className="modal">
+      <div className="modal-box">
+        <form method="dialog">
+          {/* if there is a button in form, it will close the modal */}
+          <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+        </form>
+        <h1>Edit Profile</h1>
+
+        <div className='flex flex-col justify-center gap-1'>
+          <div>
+            <TextInput>First Name</TextInput>
+          </div>
+          <div>
+            <TextInput>Last Name</TextInput>
+          </div>
+          <div>
+            <InputTitle>Password</InputTitle>
+            <label className="input input-bordered flex items-center gap-2 border-2 border-[#717171] bg-[#f8f8f8]">
+              <input type="password" className="grow" />
+            </label>
+          </div>
+
+          <button className='btn btn-success mt-4'>Save Changes</button>
+        </div>
+        <p className="py-4">Press ESC key or click on ✕ button to close</p>
+      </div>
+    </dialog>
+  </>;
 }
 
 export default Profile;
