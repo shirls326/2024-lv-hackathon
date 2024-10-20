@@ -40,6 +40,12 @@ function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
+    if (!email || !password) {
+      setError('Please fill in all fields.');
+      return;
+    }
+
     try {
       await signInWithEmailAndPassword(auth, email, password);
 
@@ -65,11 +71,15 @@ function Login() {
       setError('');
       console.error(error);
       switch (error.code) {
+        case 'auth/invalid-email':
+          setError('Invalid email. Please try again.');
+          break;
         case 'auth/user-not-found':
           setError('Account not found. Please check your email address.');
           break;
+        case 'auth/invalid-credential':
         case 'auth/wrong-password':
-          setError('Incorrect password. Please try again.');
+          setError('Incorrect credentials. Please try again.');
           break;
         default:
           setError('Failed to log in. Please try again later.');
@@ -104,11 +114,14 @@ function Login() {
       </div>
 
       {error && error.length > 0 && 
-        <div className="toast toast-start lg:toast-center">
-          <div className="alert alert-error">
-            <span>{error}</span>
-          </div>
+      <div className="toast toast-start">
+        <div className="alert alert-error flex justify-between items-center">
+          <span>{error}</span>
+          <button className="btn btn-sm btn-ghost ml-4" onClick={() => setError('')}>
+            ✕
+          </button>
         </div>
+      </div>
       }
     </div>
   );
