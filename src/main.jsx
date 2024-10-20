@@ -4,7 +4,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import UploadPage from './pages/images/UploadPage';
 import DisplayResultComponent from './Components/DisplayResult';
-import QRCodeComponent from './Components/QRCodeBox';
+import QRCodePage from './pages/qr-code/QRCodePage';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // pages
@@ -25,7 +25,7 @@ createRoot(document.getElementById('root')).render(
     <BrowserRouter basename="/">
       <Routes>
         <Route path="/" element={<Landing />}/>
-        <Route path="/qr" element={<QRCodeComponent />} />
+        <Route path="/qr" element={<QRCodePage />} />
         <Route path="/upload" element={<UploadPage />} />
         <Route path="/result" element={<DisplayResultComponent />} />
         <Route path="/login" element={<Login />} />
