@@ -1,5 +1,5 @@
 // React
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // Firebase
 import { auth, db } from '../../firebase/config';
@@ -10,6 +10,7 @@ import { push, ref, set } from 'firebase/database';
 import Navbar from '../../components/Navbar';
 import Sidebar from '../../components/Sidebar';
 import { useNavigate } from 'react-router';
+import CameraSVG from '/camera.svg?url';
 
 // AWS
 import { PutObjectCommand } from '@aws-sdk/client-s3';
@@ -91,28 +92,66 @@ function NewProduct() {
     <>
       <Navbar />
       <Sidebar />
-      <div className='newProductContainer'>
-        <h3>Name</h3>
-        <label className="input input-bordered flex items-center gap-2 border-2 border-[#717171] bg-[#f8f8f8]">
-          <input type="text" className="grow text-black" onChange={e => setName(e.target.value)} />
-        </label>
-        <h3>Description</h3>
-        <label className="input input-bordered flex items-center gap-2 border-2 border-[#717171] bg-[#f8f8f8]">
-          <input type="text" className="grow text-black" onChange={e => setDesc(e.target.value)} />
-        </label>
-        <h3>Price</h3>
-        <label className="input input-bordered flex items-center gap-2 border-2 border-[#717171] bg-[#f8f8f8]">
-          <input type="text" className="grow text-black" onChange={e => setPrice(e.target.value)} />
-        </label>
-        <h1>Create Product</h1>
+      <div data-theme='light' className='newProductContainer pl-[calc(20vw+10rem)] pr-[10rem] pt-[calc(9vh+2rem)] pb-[7rem] !max-w-screen !h-screen box-border'>
+        {/* <h1>Create Product</h1> */}
+        {/* Buttons */}
         <h3>Upload Image</h3>
-        <label className="input input-bordered flex items-center gap-2 border-2 border-[#717171] bg-[#f8f8f8]">
-          <input type="file" className="grow text-black" onChange={e => setImage(e.target.files[0])} />
+        <div className="flex space-x-4">
+          {/* Camera Button */}
+          <label className="btn btn-outline btn-square border-2 rounded-lg cursor-pointer">
+            <input
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={e => setImage(e.target.files[0])}
+            />
+            <img src={CameraSVG} className='h-full w-auto'></img>
+          </label>
+
+          {/* Add Button with Dashed Border for file upload */}
+          <label className="btn btn-outline btn-square border-2 border-dashed rounded-lg cursor-pointer">
+            <input
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={e => setImage(e.target.files[0])}
+            />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
+            </svg>
+          </label>
+        </div>
+
+        <h3>Item Name</h3>
+        <label className="input input-bordered flex items-center gap-2 border-2 border-[#717171] bg-[#f8f8f8] h-[6vh] min-h-[6vh]">
+          <input type="text" className="grow text-black" onChange={e => setName(e.target.value)} required />
         </label>
-        <button onClick={handlePost} className='btn btn-success mt-4'>Create Product</button>
+        
+        <h3>Description</h3>
+        <textarea
+          className="textarea textarea-bordered gap-2 border-2 border-[#717171] bg-[#f8f8f8] h-[20vh] max-w-full"
+          onChange={e => setDesc(e.target.value)}
+          required
+        ></textarea>
+
+        <h3>Price</h3>
+        <div className='flex flex-row justify-between items-center'>
+          <label className="input input-bordered flex items-center gap-2 border-2 border-[#717171] bg-[#f8f8f8]">
+            $
+            <input type="number" className="grow text-black" onChange={e => setPrice(e.target.value)} required />
+          </label>
+
+          <button onClick={handlePost} className='btn btn-success'>Create Product</button>
+        </div>
       </div>
     </>
-  )
+  );
 }
 
 export default NewProduct
