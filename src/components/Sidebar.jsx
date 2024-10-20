@@ -42,7 +42,7 @@ function Sidebar({ setSelectedCategory }) {
             <div className='sidebar bottom'>
                 <button id='All' onClick={e => handleCategoryClick(e)}>All</button>
                 <button id='Free' onClick={e => handleCategoryClick(e)}>Free Stuff</button>
-                <button id='Apparel' onClick={e => handleCategoryClick(e)}>Clothing</button>
+                <button id='Clothing' onClick={e => handleCategoryClick(e)}>Clothing</button>
                 <button id='Furniture' onClick={e => handleCategoryClick(e)}>Furniture</button>
                 <button id='Kitchen' onClick={e => handleCategoryClick(e)}>Kitchen</button>
             </div>
