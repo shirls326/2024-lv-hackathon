@@ -32,10 +32,6 @@ const UploadPage = () => {
             const data = snapshot.val();
             if (data) {
               setUserVerified(data.verified);
-              if (data.verified) {
-                // Redirect to /products if already verified
-                navigate('/products');
-              }
             } else {
               console.error('User data not found in Firebase.');
             }
@@ -95,13 +91,13 @@ const UploadPage = () => {
     }
   };
 
-  // If user is verified, redirect or show message
+  // If user is verified, show a confirmation message
   if (userVerified) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen p-4">
         <h2 className="text-2xl font-bold text-center mb-4">You are already verified!</h2>
         <p className="text-center mb-6">No need to upload your ID card again.</p>
-        <button className="btn btn-primary" onClick={() => navigate('/products')}>Continue to Products</button>
+        <p className="text-center text-green-500 font-semibold">Photo upload successful. You can close this window now!</p>
       </div>
     );
   }
