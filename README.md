@@ -14,6 +14,8 @@ UniMart is a university-only platform where students buy, sell, and donate items
 - **Database:** Firebase Realtime Database
 - **Styling:** Tailwind CSS, DaisyUI
 
+![Services Diagram](./public/services-diagram.png)
+
 ## How to Run Locally
 
 1. **Clone the repository:**
