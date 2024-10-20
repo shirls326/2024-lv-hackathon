@@ -1,8 +1,10 @@
 .ad-container {
 	position: relative;
-	width: 300px;
+	width: 15vw;
+	height: 15vw;
 	border-radius: 20px;
-	overflow: hidden;
+	background-color: red;
+	/* overflow: hidden; */
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 

@@ -1,0 +1,37 @@
+.listings.Container {
+    z-index: -1; /* Ensure it's above other elements if needed */
+    position: absolute;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: flex-start; */
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: space-around;
+    background-color: white;
+    left: 20vw;
+    top:7vh;
+    
+    padding-bottom: 5vh;
+    padding-top: 5vh;
+    height: 100%;
+    max-width: 80vw;
+    justify-content: space-around;
+    overflow-x: hidden;
+    
+    .listingsGrid {
+        overflow-x: hidden;
+        
+        position: relative;
+        display: grid;
+
+        grid-template-columns: repeat(4, 1fr); /* Force 4 items per row */
+        gap: 20px;
+        max-width: 100%;
+        align-items: center; /* Vertically center the items */
+
+        overflow-y: scroll;
+        justify-items: center; /* Horizontally center the items */
+    }
+}

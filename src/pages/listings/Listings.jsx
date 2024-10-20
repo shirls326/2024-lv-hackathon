@@ -2,6 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { auth, db } from '../../firebase/config';
 import { onValue, ref } from 'firebase/database';
 import { onAuthStateChanged } from 'firebase/auth';
+import './listings.css';
+
+
+// components
+import CardListing from '../../components/cardListing.jsx';
 
 
 // component imports
@@ -40,7 +45,49 @@ function Listings() {
     <>
       <NavBar />
       <Sidebar />
-      {/* <div className="listings Container">
+      <div className="listings Container">
+        <h1>New Listings!</h1>
+        <div className='listingsGrid'>
+          <CardListing />
+          <CardListing />
+
+          <CardListing />
+
+          <CardListing />
+
+          <CardListing />
+          <CardListing />
+          <CardListing />
+
+          <CardListing />
+
+          <CardListing />
+
+          <CardListing />
+          <CardListing />
+          <CardListing />
+
+          <CardListing />
+
+          <CardListing />
+
+          <CardListing />
+          <CardListing />
+          <CardListing />
+
+          <CardListing />
+
+          <CardListing />
+
+          <CardListing />
+          
+        </div>
+       
+
+        
+
+
+        
 
 
         {products.map(product => (
@@ -50,7 +97,9 @@ function Listings() {
             <p>{product.price}</p>
           </div>
         ))}
-      </div> */}
+
+        
+      </div>
     </>
   )
 }
