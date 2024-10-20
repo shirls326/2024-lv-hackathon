@@ -27,6 +27,12 @@
         justify-content: flex-start;
         align-items: center;
         font-size: 2.5rem;
+
+        .logo-wrapper {
+            display: flex;
+            flex-direction: row;
+            cursor: pointer;
+        }
     }
     .right{
         display: flex;

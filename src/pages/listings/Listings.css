@@ -13,17 +13,18 @@
     flex-direction: column;
     /* justify-content: center; */
     align-content: space-evenly;
+    justify-content: start;
     
     background-color: white;
     left: 20vw;
-    top:7vh;
     
     padding-bottom: 5vh;
     padding-top: 9vh;
-    height: 100%;
+
+    box-sizing: border-box;
+    height: 100vh;
     max-width: 80vw;
     min-width: 50vw;
-    justify-content: space-evenly;
     overflow-x: hidden;
     
     .listingsGrid {

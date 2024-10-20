@@ -7,7 +7,7 @@
 	overflow: hidden;
 	cursor: pointer;
 
-	.adImg {
+	.ad-Img {
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -20,7 +20,7 @@
 		}
 	}
 
-	.adInfo {
+	.ad-Info {
 		padding-left: 10px;
 		max-height: 45%;
 		min-height: 25%;

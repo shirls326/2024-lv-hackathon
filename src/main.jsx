@@ -3,7 +3,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import UploadPage from './pages/images/UploadPage';
-import DisplayResultComponent from './Components/DisplayResult';
+import DisplayResultComponent from './components/DisplayResults';
 import QRCodePage from './pages/qr-code/QRCodePage';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 

@@ -10,11 +10,11 @@ import './Listings.css';
 
 
 // components
-import CardListing from '../../components/cardListing.jsx';
+import CardListing from '../../components/cardListing';
 
 // component imports
-import NavBar from '../../components/navbar.jsx';
-import Sidebar from '../../components/Sidebar.jsx';
+import Navbar from '../../components/Navbar';
+import Sidebar from '../../components/Sidebar';
 
 function Listings() {
   const [products, setProducts] = useState([]);
@@ -49,7 +49,7 @@ function Listings() {
 
   return (
     <>
-      <NavBar />
+      <Navbar />
       <Sidebar />
       <div className="listings Container">
         <h1>RECENTLY ADDED</h1>
