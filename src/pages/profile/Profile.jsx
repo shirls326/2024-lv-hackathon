@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'
 // Firebase
 import { auth, db } from '../../firebase/config';
-import { query, orderByChild, equalTo, ref, get, set } from "firebase/database";
+import { query, orderByChild, equalTo, ref, get, set, onValue } from "firebase/database";
 import { onAuthStateChanged } from 'firebase/auth';
 // Components
 import Navbar from '../../components/Navbar';
@@ -19,6 +19,7 @@ function Profile() {
   const [userProducts, setUserProducts] = useState([]);
   const [userDataLoading, setUserDataLoading] = useState(true);
   const [productDataLoading, setProductDataLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState('All');
 
   // Function to retrieve user info by email
   async function getUserByEmail(email) {
@@ -28,7 +29,7 @@ function Profile() {
     try {
       const snapshot = await get(emailQuery); // Fetch the snapshot
       if (snapshot.exists()) {
-        const userData = Object.values(snapshot.val())[0]; // Extract user data  
+        const userData = Object.values(snapshot.val())[0]; // Extract user data
         setUserData(userData); // Set the user data in state, add ID
         console.log("User data found: ", userData);
       } else {
@@ -41,31 +42,30 @@ function Profile() {
     }
   }
 
-  async function getProductsByUserID(userID) {
+  async function getProductsByUserID(uid) {
     const productsRef = ref(db, 'products');
-    const userProductQuery = query(productsRef, orderByChild('seller'), equalTo(userID));
 
-    try {
-      const snapshot = await get(userProductQuery); // Fetch the snapshot
-      if (snapshot.exists()) {
-        const data = Object.values(snapshot.val());
-        console.log("Products found: ", data);
-        setUserProducts(data);
-      } else {
-        console.log("No products found with the userID:", userID);
+    onValue(productsRef, (snapshot) => {
+      const data = snapshot.val();
+      
+      const products = [];
+      for (let id in data) {
+        if (data[id].seller === uid) {
+          products.push({ id, ...data[id] });
+        }
       }
-    } catch (error) {
-      console.error("Error fetching products data for user:", error);
-    } finally {
-      setProductDataLoading(false);
-    }
+      
+      setUserProducts(products);
+    });
+
+    setProductDataLoading(false);
   }
 
   useEffect(() => {
     // Listen to the auth state change (REQUIRED, otherwise auth.currentUser is NULL)
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log("User email", user.email);
+        console.log("User logged in: ", user);
         setUserId(user.uid);
         getUserByEmail(user.email); // Fetch user data using the email
         getProductsByUserID(user.uid)
@@ -73,7 +73,7 @@ function Profile() {
         setUserDataLoading(false);
         setProductDataLoading(false);
         console.log("No user is logged in.");
-        
+
         // force login
         navigate('/login');
       }
@@ -91,7 +91,7 @@ function Profile() {
   }
   return (
     <>
-      <Sidebar />
+      <Sidebar setSelectedCategory={setSelectedCategory} />
       <Navbar />
 
       <div data-theme="light" className="pl-[20vw] pt-[9vh] !max-w-screen !h-screen box-border">
@@ -135,19 +135,8 @@ function Profile() {
           <h2 className="text-2xl font-semibold mb-4 ml-8">My Products</h2>
           <div className="px-[2.6vw] relative grid grid-cols-4 gap-4 max-w-full items-center overflow-y-scroll justify-items-center">
 
-            {userProducts && userProducts.length > 0 && userProducts.map((prod, index) => 
-            <CardListing key={index} imgSrc={prod.imgSrc} name={prod.name} desc={prod.name} /> )
-            /* (
-              <div key={`prod_${index}`} className="card card-compact bg-base-100 shadow-md">
-                <figure>
-                  <img src={prod.imgSrc} alt="High Chair" />
-                </figure>
-                <div className="card-body">
-                  <h3 className="card-title">{prod.name}</h3>
-                  <p>{prod.price}</p>
-                </div>
-              </div>
-            )) */
+            {userProducts && userProducts.length > 0 && userProducts.map((prod, index) =>
+              <CardListing key={index} imgSrc={prod.imgSrc} name={prod.name} price={prod.price} id={prod.id} />)
             }
           </div>
         </div>
@@ -162,6 +151,7 @@ function Profile() {
 const InputTitle = ({ children }) => {
   return <h2 className='mb-[0.2rem] mt-[1rem] font-thin'>{children}</h2>
 }
+
 // eslint-disable-next-line react/prop-types
 const TextInput = ({ children, getter, setter }) => {
   return <>

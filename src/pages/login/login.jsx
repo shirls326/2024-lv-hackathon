@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import GradientSVG from '/login_gradient.svg?url';
+import corpo from '../../assets/corpo.png';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate, useLocation } from 'react-router';
 import { auth, db } from '../../firebase/config';
@@ -81,7 +82,7 @@ function Login() {
     <div data-theme={theme} className='flex flex-col lg:flex-row justify-center lg:justify-between items-center max-h-screen w-screen bg-white'>
       <div className='relative hidden lg:flex h-screen w-auto lg:w-3/5'>
         <img alt="bruh" src={GradientSVG} className='h-full w-full object-cover'></img>
-        <img alt="corpo" src="/src/assets/corpo.png" className='absolute top-0 left-0 h-full w-full object-contain p-8' />
+        <img alt="corpo" src={corpo} className='absolute top-0 left-0 h-full w-full object-contain p-8' />
       </div>
       <div className='flex flex-col justify-center items-center w-full lg:w-2/5 h-screen lg:mx-[7rem] gap-4 p-6'>
         <h1 className='text-3xl font-thin mb-4'>Login</h1>
