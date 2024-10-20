@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import QRCode from 'react-qr-code';
 import { ref, onValue, update } from 'firebase/database';
-import { db } from '../../firebase/Config'; // Adjust the import path based on your project structure
+import { db } from '../../firebase/config'; // Adjust the import path based on your project structure
 
 const QRCodePage = () => {
     const [uploadStatus, setUploadStatus] = useState('Waiting for upload...');

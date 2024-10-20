@@ -8,7 +8,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import LoadingSkeleton from '../../components/LoadingSkeleton';
 // Components
 import NavBar from '../../components/navbar.jsx';
-import Sidebar from '../../components/Sidebar.jsx';
+import Sidebar from '../../components/sidebar.jsx';
 
 
 function Profile() {
