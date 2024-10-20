@@ -6,7 +6,7 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { ref, onValue } from 'firebase/database';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../../firebase/config';
-import DisplayResult from '../../Components/DisplayResult';
+import DisplayResult from '../../components/DisplayResults';
 
 const UploadPage = () => {
   const [selectedFile, setSelectedFile] = useState(null);
