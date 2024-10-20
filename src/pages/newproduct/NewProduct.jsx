@@ -10,6 +10,8 @@ import { push, ref, set } from 'firebase/database';
 import Navbar from '../../components/Navbar';
 import Sidebar from '../../components/Sidebar';
 import { useNavigate } from 'react-router';
+import MultiSelectDropdown from './MultiSelectDropdown.jsx';
+import ConditionDropdown from './ConditionDropdown.jsx';
 import CameraSVG from '/camera.svg?url';
 
 // AWS
@@ -19,6 +21,7 @@ import { PutObjectCommand } from '@aws-sdk/client-s3';
 import './NewProduct.css';
 import { s3 } from '../../s3/config.js';
 
+
 function NewProduct() {
   const [userID, setUserID] = useState('');
   const [name, setName] = useState('');
@@ -26,7 +29,10 @@ function NewProduct() {
   const [price, setPrice] = useState(-1.0);
   const [error, setError] = useState('');
   const [image, setImage] = useState(null);
+  const [tags, setTags] = useState([]);
+  const [submitting, setSubmitting] = useState(false);
   const navigate = useNavigate();
+
 
   // ensure user is logged in
   useEffect(() => {
@@ -44,10 +50,12 @@ function NewProduct() {
 
   const handlePost = async e => {
     e.preventDefault();
-
+    setSubmitting(true);
     // ensure all fields have been filled
-    if (name === '' || desc === '' || price < 0) {
+    if (name === '' || desc === '' || price < 0 || image === null || tags.length < 1) {
       console.error("Invalid input");
+      setError("All input fields required.");
+      setSubmitting(false);
       return;
     }
 
@@ -55,10 +63,10 @@ function NewProduct() {
     const productsRef = ref(db, 'products');
     const newProductRef = push(productsRef);
 
-    
     try {
       // upload image to s3 if it exists
-      if (image) { 
+      let imgSrc = null;
+      if (image) {
         const params = {
           Bucket: import.meta.env.VITE_AWS_S3_REKOG_BUCKET_NAME,
           Key: `uploads/${newProductRef.key}/${image.name}`,
@@ -68,6 +76,8 @@ function NewProduct() {
 
         const command = new PutObjectCommand(params);
         await s3.send(command);
+
+        imgSrc = `https://${params.Bucket}.s3.amazonaws.com/${params.Key}`;
       }
 
       // create new product object
@@ -75,27 +85,33 @@ function NewProduct() {
         name,
         desc,
         price: Number(price),
-        imgSrc: image ? `https://${params.Bucket}.s3.amazonaws.com/${params.Key}` : null,
+        imgSrc,
         created: new Date().toISOString(),
-        seller: userID
+        seller: userID,
+        tags
       };
 
       // add new product to firebase
       await set(newProductRef, newProduct);
       console.log("Added " + newProduct);
+      navigate(`/products/${newProductRef.key}`);
     } catch (error) {
+      setError("ERROR: Could not create product.");
       console.error(error);
+    } finally {
+      setSubmitting(false);
     }
   }
+
 
   return (
     <>
       <Navbar />
       <Sidebar />
-      <div data-theme='light' className='newProductContainer pl-[calc(20vw+10rem)] pr-[10rem] pt-[calc(9vh+2rem)] pb-[7rem] !max-w-screen !h-screen box-border'>
+      <div data-theme='light' className='newProductContainer pl-[calc(20vw+10rem)] pr-[10rem] pt-[calc(9vh+2rem)] pb-[7rem] !max-w-screen !h-screen !min-h-fit box-border overflow-y-auto'>
         {/* <h1>Create Product</h1> */}
         {/* Buttons */}
-        <h3>Upload Image</h3>
+        <h3>Upload Image*</h3>
         <div className="flex space-x-4">
           {/* Camera Button */}
           <label className="btn btn-outline btn-square border-2 rounded-lg cursor-pointer">
@@ -128,28 +144,46 @@ function NewProduct() {
           </label>
         </div>
 
-        <h3>Item Name</h3>
+        <h3>Item Name*</h3>
         <label className="input input-bordered flex items-center gap-2 border-2 border-[#717171] bg-[#f8f8f8] h-[6vh] min-h-[6vh]">
           <input type="text" className="grow text-black" onChange={e => setName(e.target.value)} required />
         </label>
         
-        <h3>Description</h3>
+        <h3>Description*</h3>
         <textarea
           className="textarea textarea-bordered gap-2 border-2 border-[#717171] bg-[#f8f8f8] h-[20vh] max-w-full"
           onChange={e => setDesc(e.target.value)}
           required
         ></textarea>
 
-        <h3>Price</h3>
-        <div className='flex flex-row justify-between items-center'>
-          <label className="input input-bordered flex items-center gap-2 border-2 border-[#717171] bg-[#f8f8f8]">
-            $
-            <input type="number" className="grow text-black" onChange={e => setPrice(e.target.value)} required />
-          </label>
 
-          <button onClick={handlePost} className='btn btn-success'>Create Product</button>
+        <div className='flex flex-row justify-between items-baseline'>
+          <div>
+            <h3>Select Tags (>= 1)*</h3>
+            <MultiSelectDropdown selectedItems={tags} setSelectedItems={setTags} />
+          </div>
+          <div>
+            <h3>Price*</h3>
+            <label className="input input-bordered flex items-center gap-2 border-2 border-[#717171] bg-[#f8f8f8]">
+              $
+              <input type="number" className="grow text-black" onChange={e => setPrice(e.target.value)} required />
+            </label>
+          </div>
+
+
+          <button onClick={handlePost} className='btn btn-success mt-auto'>
+            {submitting ? <span className="loading loading-spinner"></span> : <span>Create Product</span>}
+          </button>
         </div>
       </div>
+
+      {error && error.length > 0 && 
+        <div className="toast toast-start">
+          <div className="alert alert-error">
+            <span>{error}</span>
+          </div>
+        </div>
+      }
     </>
   );
 }
