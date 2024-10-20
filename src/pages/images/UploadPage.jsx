@@ -45,7 +45,6 @@ const UploadPage = () => {
       } else {
         console.error('No user is currently signed in.');
         setError('Please log in to continue.');
-        // Pass the current location to the login page
         navigate('/login', { state: { from: location } });
       }
     });
@@ -69,7 +68,7 @@ const UploadPage = () => {
 
     const params = {
       Bucket: 'myimagestoragekd',
-      Key: `uploads/${userUid}/${selectedFile.name}`, // Use userUid in the file path
+      Key: `uploads/${userUid}/${selectedFile.name}`,
       Body: selectedFile,
       ContentType: selectedFile.type,
     };
@@ -82,7 +81,7 @@ const UploadPage = () => {
       console.log('File uploaded successfully.');
       setUploadSuccess(true);
 
-      // Set a flag to start checking results after upload
+      // Start checking results after upload is successful
       setCheckResults(true);
     } catch (error) {
       console.error('Error uploading file:', error);
@@ -120,7 +119,14 @@ const UploadPage = () => {
         {uploading ? 'Uploading...' : 'Upload'}
       </button>
       {uploadSuccess && <p className="text-green-500 mt-4">Upload successful! Checking the results...</p>}
-      {checkResults && <DisplayResults />}
+      {checkResults && (
+        <>
+          <DisplayResults />
+          <p className="text-center text-green-500 font-semibold mt-6">
+            Photo upload successful. You can close this window now!
+          </p>
+        </>
+      )}
     </div>
   );
 };
