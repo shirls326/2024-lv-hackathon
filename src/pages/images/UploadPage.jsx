@@ -4,9 +4,9 @@ import { s3 } from '../../Config/awsConfig';
 import { PutObjectCommand } from '@aws-sdk/client-s3';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { ref, onValue } from 'firebase/database';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { db } from '../../firebase/config';
-import DisplayResult from '../../components/DisplayResults';
+import DisplayResults from '../../components/DisplayResults';
 
 const UploadPage = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -17,6 +17,7 @@ const UploadPage = () => {
   const [userVerified, setUserVerified] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const auth = getAuth();
@@ -48,12 +49,13 @@ const UploadPage = () => {
       } else {
         console.error('No user is currently signed in.');
         setError('Please log in to continue.');
-        navigate('/login'); // Redirect to login page
+        // Pass the current location to the login page
+        navigate('/login', { state: { from: location } });
       }
     });
 
     return () => unsubscribeAuth();
-  }, [navigate]);
+  }, [navigate, location]);
 
   const handleFileChange = (event) => {
     console.log('File change event:', event);
@@ -113,7 +115,7 @@ const UploadPage = () => {
         {uploading ? 'Uploading...' : 'Upload'}
       </button>
       {uploadSuccess && <p>Upload successful! Checking the results...</p>}
-      {checkResults && <DisplayResult />}
+      {checkResults && <DisplayResults />}
     </div>
   );
 };

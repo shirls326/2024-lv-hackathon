@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import GradientSVG from '/login_gradient.svg?url';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { useNavigate } from 'react-router';
+import { useNavigate, useLocation } from 'react-router'; // Import useLocation
 import { auth, db } from '../../firebase/config';
 import { get, ref } from 'firebase/database';
 
@@ -16,6 +16,10 @@ function Login() {
   const [error, setError] = useState('');
   const [theme, setTheme] = useState('light');
   const navigate = useNavigate();
+  const location = useLocation(); // Get the current location
+
+  // Get the 'from' location from the state or default to '/'
+  const from = location.state?.from?.pathname || '/';
 
   const handleEmailChange = (event) => {
     event.preventDefault();
@@ -33,23 +37,27 @@ function Login() {
     }
   }
 
-
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
 
-      // fetch user data
+      // Fetch user data
       const userRef = ref(db, `users/${auth.currentUser.uid}`);
       const snapshot = await get(userRef);
       const data = snapshot.val();
       console.log(data);
 
-      // check if user is verified
-      if (data.verified) { 
-        navigate('/products');
+      // Check if there is a 'from' path and navigate to it
+      if (from && from !== '/') {
+        navigate(from, { replace: true });
       } else {
-        navigate('/qr');
+        // Check if user is verified
+        if (data.verified) { 
+          navigate('/products');
+        } else {
+          navigate('/qr');
+        }
       }
 
     } catch (error) {
