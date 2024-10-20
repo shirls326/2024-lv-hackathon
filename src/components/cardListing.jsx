@@ -1,18 +1,19 @@
 import React from 'react';
 import './css/cardListing.css';
+import flowerTest from './flowerTest.jpeg';
 
 function cardListing() {
 return (
     <div className="ad-container">
         <div className='adImg'>
-            <img src= 'https://via.placeholder.com/150' alt="listing image"/>   
+            <img src= {flowerTest} alt="listing image"/>   
             
             
         </div>
 
         <div className='adInfo'> 
-            <h4>ITEM LISTING</h4>
-            <p>$XXX.XX</p>
+            <p>ITEM LISTING</p>
+            <p className='price'>$XXX.XX</p>
         </div>
         
         
