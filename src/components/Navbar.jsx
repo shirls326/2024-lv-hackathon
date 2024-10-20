@@ -20,21 +20,37 @@ function Navbar() {
   return (
     <div className='navBar'>
       <div className='left'>
-        <div className='logo-wrapper' data-redirect="/products" onClick={handleRedirect}>
+        <div
+          className='logo-wrapper breathing-animation'
+          data-redirect="/products"
+          onClick={handleRedirect}
+        >
           <TextLogo />
-          <img src={UniMartLogo} alt='UniMart Logo' />
+          <img src={UniMartLogo} alt='UniMart Logo' className="uniMart-logo" />
         </div>
       </div>
       <div className='right'>
-        <div className='icon-wrapper' data-redirect="/notifications" onClick={handleRedirect}>
+        <div
+          className='icon-wrapper hover:scale-110 transition-transform duration-300'
+          data-redirect="/notifications"
+          onClick={handleRedirect}
+        >
           <img src={NotificationsIcon} alt='Notifications Icon' />
         </div>
 
-        <div className='icon-wrapper' data-redirect="/messages" onClick={handleRedirect}>
+        <div
+          className='icon-wrapper hover:scale-110 transition-transform duration-300'
+          data-redirect="/messages"
+          onClick={handleRedirect}
+        >
           <img src={MessagesIcon} alt='Messages Icon' />
         </div>
 
-        <div className='icon-wrapper' data-redirect="/profile" onClick={handleRedirect}>
+        <div
+          className='icon-wrapper hover:scale-110 transition-transform duration-300'
+          data-redirect="/profile"
+          onClick={handleRedirect}
+        >
           <img src={ProfileIcon} alt='Profile Icon' />
         </div>
       </div>
