@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 function MultiSelectDropdown({selectedItems, setSelectedItems}) {
 
-  const options = ['Apparel', 'Electronics', 'Furniture', 'Free Items', 'Home Goods', 'Kitchen', 'School Supplies'];
+  const options = ['Clothing', 'Electronics', 'Furniture', 'Free Items', 'Home Goods', 'Kitchen', 'School Supplies'];
 
   // Handle checkbox change
   const handleCheckboxChange = (e) => {
