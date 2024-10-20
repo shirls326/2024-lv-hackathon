@@ -4,7 +4,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import UploadPage from './pages/images/UploadPage';
 import DisplayResultComponent from './Components/DisplayResult';
-import QRCodeComponent from './Components/QRCodeBox';
+import QRCodeComponent from './pages/qr-code/QRCodePage';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // pages
