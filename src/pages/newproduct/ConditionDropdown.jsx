@@ -3,44 +3,44 @@ import PropTypes from 'prop-types';
 function ConditionDropdown({selectedCondition, setSelectedCondition}) {
 
   const conditions = [
-    'New (Brand New / Sealed)',
+    'Brand New',
     'Like New',
-    'Excellent / Mint Condition',
+    'Excellent',
     'Very Good',
     'Good',
     'Fair',
     'Poor / Heavily Used',
     'For Parts / Not Working',
   ];
-
-  const handleSelectChange = (e) => {
-    setSelectedCondition(e.target.value);
+  
+  // Handle option selection
+  const handleOptionClick = (condition) => {
+    setSelectedCondition(condition);
   };
 
   return (
     <div className="dropdown dropdown-end">
-      {/* Trigger Button */}
+      {/* Dropdown Trigger */}
       <label tabIndex={0} className="btn m-1">
         {selectedCondition || 'Select Condition'}
       </label>
 
-      {/* Dropdown Content */}
-      <div tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-        <select
-          value={selectedCondition}
-          onChange={handleSelectChange}
-          className="select select-bordered w-full"
-        >
-          <option disabled value="">
-            Select a condition
-          </option>
-          {conditions.map((condition, index) => (
-            <option key={index} value={condition}>
+      {/* Dropdown Menu */}
+      <ul
+        tabIndex={0}
+        className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+      >
+        {conditions.map((condition, index) => (
+          <li key={index}>
+            <button
+              className="w-full text-left bg-white"
+              onClick={() => handleOptionClick(condition)}
+            >
               {condition}
-            </option>
-          ))}
-        </select>
-      </div>
+            </button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
