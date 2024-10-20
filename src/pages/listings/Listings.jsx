@@ -13,10 +13,10 @@ import CardListing from '../../components/cardListing';
 import Navbar from '../../components/Navbar';
 import Sidebar from '../../components/Sidebar';
 
-function Listings() {
+function Listings({ initCategory }) {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [selectedCategory, setSelectedCategory] = useState(initCategory ?? 'All');
   const [userSavedListings, setUserSavedListings] = useState([]);
   const navigate = useNavigate();
 
@@ -84,7 +84,7 @@ function Listings() {
   return (
     <>
       <Navbar />
-      <Sidebar selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
+      <Sidebar setSelectedCategory={setSelectedCategory} />
       <div className="listings Container">
         <h1>RECENTLY ADDED</h1>
         <div className='listingsGrid'>
