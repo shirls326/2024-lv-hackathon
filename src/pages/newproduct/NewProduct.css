@@ -1,0 +1,13 @@
+.newProductContainer {
+	position: absolute;
+	left: 20vw;
+	display: flex;
+	flex-direction: column;
+	width: calc(100% - 20vw - 4em);
+	height: 100%;
+	background-color: white;
+	color: var(--dark);
+	font-family: "niveau-grotesk", sans-serif;
+	font-weight: lighter;
+    padding: 0 2em;
+}

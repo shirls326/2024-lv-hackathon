@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
-import { db } from '../../firebase/config';
+import { auth, db } from '../../firebase/config';
 import { ref, set } from 'firebase/database';
 import GradientSVG from '/login_gradient.svg?url';
 
+
+// eslint-disable-next-line react/prop-types
+const InputTitle = ({ children }) => {
+ return <h2 className='mb-[0.2rem] mt-[1rem] font-thin'>{children}</h2>
+}
 
 function SignUp() {
   const [firstName, setFirstName] = useState('');
@@ -14,6 +19,7 @@ function SignUp() {
   const [password, setPassword] = useState('');
   const [uni, setUni] = useState('');
   const [theme, setTheme] = useState('light');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   // Handlers
@@ -62,9 +68,15 @@ function SignUp() {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    
+
+    if (email.split("@").pop() !== 'lehigh.edu') {
+      setError('Must be valid university email.');
+      return;
+    }
+
     // ensure all fields have been filled
     if (!(firstName && lastName && email && userName && password && uni)) {
+      setError('Invalid input.');
       console.error('Invalid input');
       return;
     }
@@ -82,7 +94,7 @@ function SignUp() {
         lastName
       });
 
-      navigate('/login');
+      navigate('/qr');
 
     } catch (error) {
       console.error(error);
@@ -90,15 +102,19 @@ function SignUp() {
       // switch on error code
       switch (error.code) {
         case 'auth/invalid-email':
+          setError('Invalid email format.');
           console.error('Invalid email format.');
           break;
         case 'auth/weak-password':
+          setError('Password is too weak. Please use at least 6 characters.');
           console.error('Password is too weak. Please use at least 6 characters.');
           break;
         case 'auth/email-already-in-use':
+          setError('Email is already in use. Please use a different email.');
           console.error('Email is already in use. Please use a different email.');
           break;
         default:
+          setError('Signup failed. Please try again later.')
           console.error('Signup failed. Please try again later.');
           break;
       }
@@ -109,52 +125,60 @@ function SignUp() {
     <div data-theme={theme} className='flex justify-between items-center max-h-screen w-screen bg-white'>
       <img alt="bruh" src={GradientSVG} className='h-screen w-auto'></img>
       <div className='flex flex-col justify-center w-full h-screen mx-[7rem] gap-[0.5rem]'>
-        <h1 className='mx-auto'>Sign Up</h1>
+        <h1 className='mx-auto font-thin'>Sign Up</h1>
         <div className='flex flex-row justify-between'>
           <div className=''>
-            <h3>First Name</h3>
-            <label className="input input-bordered flex items-center gap-2">
-              <input type="text" className="grow" placeholder="John" onChange={handleFirstNameChange} />
+            <InputTitle>First Name</InputTitle>
+            <label className="input input-bordered flex items-center gap-2 border-2 border-[#717171] bg-[#f8f8f8]">
+              <input type="text" className="grow" onChange={handleFirstNameChange} />
             </label>
           </div>
 
           <div>
-            <h3>Last Name</h3>
-            <label className="input input-bordered flex items-center gap-2">
-              <input type="text" className="grow" placeholder="Doe" onChange={handleLastNameChange} />
+            <InputTitle>Last Name</InputTitle>
+            <label className="input input-bordered flex items-center gap-2 border-2 border-[#717171] bg-[#f8f8f8]">
+              <input type="text" className="grow" onChange={handleLastNameChange} />
             </label>
           </div>
         </div>
 
         <div>
-          <h3>Email</h3>
-          <label className="input input-bordered flex items-center gap-2">
-            <input type="text" className="grow" placeholder="Email" onChange={handleEmailChange} />
+          <InputTitle>Email</InputTitle>
+          <label className="input input-bordered flex items-center gap-2 border-2 border-[#717171] bg-[#f8f8f8]">
+            <input type="text" className="grow" onChange={handleEmailChange} />
           </label>
         </div>
 
         <div>
-          <h3>Username</h3>
-          <label className="input input-bordered flex items-center gap-2">
-            <input type="text" className="grow" placeholder="Username" onChange={handleUserNameChange} />
+          <InputTitle>Username</InputTitle>
+          <label className="input input-bordered flex items-center gap-2 border-2 border-[#717171] bg-[#f8f8f8]">
+            <input type="text" className="grow" onChange={handleUserNameChange} />
           </label>
         </div>
 
         <div>
-          <h3>Password</h3>
-          <label className="input input-bordered flex items-center gap-2">
-            <input type="text" className="grow" placeholder="Password" onChange={handlePasswordChange} />
+          <InputTitle>Password</InputTitle>
+          <label className="input input-bordered flex items-center gap-2 border-2 border-[#717171] bg-[#f8f8f8]">
+            <input type="text" className="grow" onChange={handlePasswordChange} />
           </label>
         </div>
 
         <div>
-          <h3>University</h3>
-          <label className="input input-bordered flex items-center gap-2">
-            <input type="password" className="grow" placeholder="University" onChange={handleUniChange} />
+          <InputTitle>University</InputTitle>
+          <label className="input input-bordered flex items-center gap-2 border-2 border-[#717171] bg-[#f8f8f8]">
+            <input type="text" className="grow" onChange={handleUniChange} />
           </label>
         </div>
-        <button onClick={handleSignUp} className='btn btn-primary'>Sign Up</button>
+
+        <button onClick={handleSignUp} className='btn btn-success mt-3'>Sign Up</button>
       </div>
+      {error && error.length > 0 && 
+        <div className="toast toast-start">
+          <div className="alert alert-error">
+            <span>{error}</span>
+          </div>
+        </div>
+      }
     </div>
   );
 }

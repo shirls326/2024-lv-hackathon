@@ -1,4 +1,8 @@
+// React
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router';
+
+// Firebase
 import { auth, db } from '../../firebase/config';
 import { onValue, ref } from 'firebase/database';
 import { onAuthStateChanged } from 'firebase/auth';
@@ -8,15 +12,17 @@ import './listings.css';
 // components
 import CardListing from '../../components/cardListing.jsx';
 
-
 // component imports
 import NavBar from '../../components/navbar.jsx';
 import Sidebar from '../../components/sidebar.jsx';
+
 function Listings() {
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {// ensure user is logged in
     onAuthStateChanged(auth, (user) => {
+      console.log(user);
       if (user) {
         setUserID(user.uid);
         fetchProducts();
@@ -28,7 +34,6 @@ function Listings() {
 
   // fetch products from firebase
   const fetchProducts = () => {
-    ;
     const productsRef = ref(db, 'products');
 
     onValue(productsRef, (snapshot) => {
