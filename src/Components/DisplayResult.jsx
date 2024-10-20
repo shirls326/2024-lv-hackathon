@@ -1,7 +1,6 @@
 // DisplayResultComponent.jsx (for PC view)
 import { useEffect, useState } from 'react';
-import { doc, getDoc, updateDoc } from 'firebase/firestore';
-import { db } from '../firebase/config'; // Adjust the path as needed
+import { ref, get, update } from 'firebase/database';import { db } from '../firebase/config'; // Adjust the path as needed
 
 const DisplayResultComponent = () => {
     const [result, setResult] = useState(null);
@@ -11,22 +10,21 @@ const DisplayResultComponent = () => {
 
     useEffect(() => {
         const fetchUserLIN = async () => {
-            try {
-                // Replace 'user@example.com' with the actual logged-in user's email or identifier.
-                const userDocRef = doc(db, 'uploads', 'user@example.com');
-                const userDoc = await getDoc(userDocRef);
-                
-                if (userDoc.exists()) {
-                    const userData = userDoc.data();
-                    setUserLIN(userData.LIN); // Assume full LIN is stored under 'LIN'
-                } else {
-                    console.error('User document not found in Firebase.');
-                }
-            } catch (err) {
-                console.error('Error fetching user data from Firebase:', err);
+          try {
+            const userRef = ref(db, 'uploads/user@example.com'); // Adjust the path as needed
+            const snapshot = await get(userRef);
+    
+            if (snapshot.exists()) {
+              const userData = snapshot.val();
+              setUserLIN(userData.LIN); // Assume full LIN is stored under 'LIN'
+            } else {
+              console.error('User data not found in Firebase.');
             }
+          } catch (err) {
+            console.error('Error fetching user data from Firebase:', err);
+          }
         };
-
+    
         fetchUserLIN();
     }, []);
 
@@ -50,9 +48,9 @@ const DisplayResultComponent = () => {
 
                 // Check if the userLIN is loaded and matches the last 4 digits of the student ID.
                 if (userLIN && data.studentID === userLIN.slice(-4)) {
-                    const userDocRef = doc(db, 'uploads', 'user@example.com');
-                    await updateDoc(userDocRef, {
-                        verified: true,
+                    const userRef = ref(db, 'uploads/user@example.com');
+                    await update(userRef, {
+                    verified: true,
                     });
                 } else {
                     console.error('LIN mismatch or user LIN not loaded yet.');
