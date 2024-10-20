@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 const QRCodePage = () => {
   const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
@@ -28,10 +29,12 @@ const QRCodePage = () => {
               console.error('User data not found in Firebase.');
               setUserData(null);
             }
+            setLoading(false);
           },
           (error) => {
             console.error('Error fetching real-time updates:', error);
             setError('Failed to fetch user data.');
+            setLoading(false);
           }
         );
 
@@ -40,6 +43,7 @@ const QRCodePage = () => {
       } else {
         console.error('No user is currently signed in.');
         setError('Please log in to continue.');
+        setLoading(false);
       }
     });
 
@@ -50,47 +54,50 @@ const QRCodePage = () => {
   const uploadUrl = `${window.location.origin}/upload`;
 
   return (
-    <div>
-      <h2>Your ID Card Verification Status</h2>
-      <div
-        style={{
-          border: '2px solid #000',
-          padding: '10px',
-          marginBottom: '20px',
-          minHeight: '300px',
-        }}
-      >
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+      <h2 className="text-2xl font-bold text-center mb-6">Your ID Card Verification Status</h2>
+      <div className="border-2 border-gray-300 rounded-lg shadow-lg w-full max-w-md p-4 mb-6">
         {error ? (
-          <p>Error: {error}</p>
+          <p className="text-red-500">{error}</p>
+        ) : loading ? (
+          <div className="flex flex-col items-center">
+            <span className="loading loading-spinner text-primary"></span>
+            <p className="mt-4">Analyzing ID card...</p>
+          </div>
         ) : userData ? (
-          <div>
-            <p>Status: {userData.verified ? 'Verified' : 'Not Verified'}</p>
-            <p>User LIN: {userData.uniID}</p>
+          <div className="text-center">
+            <p className="mb-2">Status: {userData.verified ? 'Verified' : 'Not Verified'}</p>
+            <p className="mb-4">User LIN: {userData.uniID}</p>
             {userData.imageUrl && (
-              <img
-                src={userData.imageUrl}
-                alt="Uploaded ID Card"
-                style={{ maxWidth: '100%', marginTop: '10px' }}
-              />
+              <div className="border border-gray-300 p-2 mb-4 rounded-md">
+                <img
+                  src={userData.imageUrl}
+                  alt="Uploaded ID Card"
+                  className="max-w-full rounded-md"
+                />
+              </div>
             )}
             {userData.verified && (
-              <button onClick={() => navigate('/products')}>
+              <button
+                className="btn btn-primary w-full"
+                onClick={() => navigate('/products')}
+              >
                 Continue to Products
               </button>
             )}
           </div>
         ) : (
-          <p>Loading your data...</p>
+          <p className="text-center">Loading your data...</p>
         )}
       </div>
       {!userData?.verified && (
-        <>
-          <h2>Scan this QR code to upload your ID card</h2>
-          <QRCode value={uploadUrl} size={256} />
-          <p>
-            Use your phone to scan this code and upload a photo of your ID card.
-          </p>
-        </>
+        <div className="text-center">
+          <h2 className="text-xl font-semibold mb-4">Scan this QR code to upload your ID card</h2>
+          <div className="flex justify-center">
+            <QRCode value={uploadUrl} size={256} />
+          </div>
+          <p className="mt-4">Use your phone to scan this code and upload a photo of your ID card.</p>
+        </div>
       )}
     </div>
   );
