@@ -67,12 +67,13 @@ const DisplayResultComponent = () => {
                     const userRef = ref(db, 'users/' + userUid);
                     await update(userRef, {
                         verified: true,
+                        imageUrl: data.imageUrl, // Store the imageUrl
                     });
                     console.log('User verified successfully.');
                 } else {
                     console.error('LIN mismatch or user LIN not loaded yet.');
                     setError('Verification failed: LIN mismatch.');
-                }
+                }                
             } catch (error) {
                 console.error('Error fetching ID card data:', error);
                 setError(error.message);

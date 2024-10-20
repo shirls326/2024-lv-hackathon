@@ -1,67 +1,99 @@
 // QRCodePage.jsx
 import React, { useEffect, useState } from 'react';
 import { ref, onValue } from 'firebase/database';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { db } from '../../firebase/config'; // Adjust the path as needed
+import QRCode from 'react-qr-code';
+import { useNavigate } from 'react-router-dom';
 
 const QRCodePage = () => {
-    const [users, setUsers] = useState([]);
-    const [error, setError] = useState(null);
+  const [userData, setUserData] = useState(null);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        const usersRef = ref(db, 'users');
-        const unsubscribe = onValue(usersRef, (snapshot) => {
+  useEffect(() => {
+    const auth = getAuth();
+    const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        const userRef = ref(db, 'users/' + uid);
+
+        const unsubscribeUser = onValue(
+          userRef,
+          (snapshot) => {
             const data = snapshot.val();
             if (data) {
-                // Filter users who are verified
-                const verifiedUsers = Object.entries(data)
-                    .filter(([uid, userData]) => userData.verified)
-                    .map(([uid, userData]) => ({
-                        uid,
-                        ...userData,
-                    }));
-                setUsers(verifiedUsers);
+              setUserData({ uid, ...data });
             } else {
-                setUsers([]);
+              console.error('User data not found in Firebase.');
+              setUserData(null);
             }
-        }, (error) => {
+          },
+          (error) => {
             console.error('Error fetching real-time updates:', error);
-            setError('Failed to fetch real-time updates.');
-        });
+            setError('Failed to fetch user data.');
+          }
+        );
 
-        return () => unsubscribe();
-    }, []);
+        // Cleanup the listener when component unmounts
+        return () => unsubscribeUser();
+      } else {
+        console.error('No user is currently signed in.');
+        setError('Please log in to continue.');
+      }
+    });
 
-    const uploadUrl = `${window.location.origin}/upload`;
+    // Cleanup the auth listener when component unmounts
+    return () => unsubscribeAuth();
+  }, []);
 
-    return (
-        <div>
-            <h2>Upload Your ID Card</h2>
-            <div style={{ border: '2px solid #000', padding: '10px', marginBottom: '20px', minHeight: '300px' }}>
-                {error ? (
-                    <p>Error: {error}</p>
-                ) : (
-                    <>
-                        {users.length > 0 ? (
-                            users.map(user => (
-                                <div key={user.uid} style={{ marginBottom: '20px' }}>
-                                    <p>Status: Verified</p>
-                                    <p>User LIN: {user.LIN}</p>
-                                    {user.imageUrl && (
-                                        <img src={user.imageUrl} alt="Uploaded ID Card" style={{ maxWidth: '100%', marginTop: '10px' }} />
-                                    )}
-                                </div>
-                            ))
-                        ) : (
-                            <p>No verified users yet.</p>
-                        )}
-                    </>
-                )}
-            </div>
-            <h2>Scan this QR code to upload your ID card</h2>
-            <QRCode value={uploadUrl} size={256} />
-            <p>Use your phone to scan this code and upload a photo of your ID card.</p>
-        </div>
-    );
+  const uploadUrl = `${window.location.origin}/upload`;
+
+  return (
+    <div>
+      <h2>Your ID Card Verification Status</h2>
+      <div
+        style={{
+          border: '2px solid #000',
+          padding: '10px',
+          marginBottom: '20px',
+          minHeight: '300px',
+        }}
+      >
+        {error ? (
+          <p>Error: {error}</p>
+        ) : userData ? (
+          <div>
+            <p>Status: {userData.verified ? 'Verified' : 'Not Verified'}</p>
+            <p>User LIN: {userData.uniID}</p>
+            {userData.imageUrl && (
+              <img
+                src={userData.imageUrl}
+                alt="Uploaded ID Card"
+                style={{ maxWidth: '100%', marginTop: '10px' }}
+              />
+            )}
+            {userData.verified && (
+              <button onClick={() => navigate('/products')}>
+                Continue to Products
+              </button>
+            )}
+          </div>
+        ) : (
+          <p>Loading your data...</p>
+        )}
+      </div>
+      {!userData?.verified && (
+        <>
+          <h2>Scan this QR code to upload your ID card</h2>
+          <QRCode value={uploadUrl} size={256} />
+          <p>
+            Use your phone to scan this code and upload a photo of your ID card.
+          </p>
+        </>
+      )}
+    </div>
+  );
 };
 
 export default QRCodePage;
