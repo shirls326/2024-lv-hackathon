@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router';
 import { auth, db } from '../../firebase/config';
 import { onValue, ref } from 'firebase/database';
 import { onAuthStateChanged } from 'firebase/auth';
-import './listings.css';
+import './Listings.css';
 
 
 // components
@@ -14,7 +14,7 @@ import CardListing from '../../components/cardListing.jsx';
 
 // component imports
 import NavBar from '../../components/navbar.jsx';
-import Sidebar from '../../components/sidebar.jsx';
+import Sidebar from '../../components/Sidebar.jsx';
 
 function Listings() {
   const [products, setProducts] = useState([]);
@@ -55,35 +55,23 @@ function Listings() {
         <div className='listingsGrid'>
           <CardListing />
           <CardListing />
-
-          <CardListing />
-
-          <CardListing />
-
           <CardListing />
           <CardListing />
           <CardListing />
-
-          <CardListing />
-
-          <CardListing />
-
           <CardListing />
           <CardListing />
           <CardListing />
-
-          <CardListing />
-
-          <CardListing />
-
           <CardListing />
           <CardListing />
           <CardListing />
-
           <CardListing />
-
           <CardListing />
-
+          <CardListing />
+          <CardListing />
+          <CardListing />
+          <CardListing />
+          <CardListing />
+          <CardListing />
           <CardListing />
           
         </div>
