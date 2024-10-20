@@ -12,6 +12,7 @@ import CardListing from '../../components/cardListing';
 import EditSVG from '../../assets/edit_icon.svg';
 import LoadingSkeleton from '../../components/LoadingSkeleton';
 import placeholder from '../../assets/product_placeholder.svg';
+import { useNavigate } from 'react-router';
 
 function Profile() {
   const [userId, setUserId] = useState(null);
@@ -20,6 +21,7 @@ function Profile() {
   const [userDataLoading, setUserDataLoading] = useState(true);
   const [productDataLoading, setProductDataLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const navigate = useNavigate();
 
   // Function to retrieve user info by email
   async function getUserByEmail(email) {
@@ -83,6 +85,13 @@ function Profile() {
     return () => unsubscribe();
   }, []);
 
+  useEffect(() => {
+    if (selectedCategory === 'Saved') {
+      // Navigate to /products with a initial prop
+      navigate('/products', { state: { initCategory: 'Saved' } });
+    }
+  }, [selectedCategory]);
+
   if (userDataLoading || productDataLoading) {
     return <LoadingSkeleton />
   }
@@ -91,7 +100,7 @@ function Profile() {
   }
   return (
     <>
-      <Sidebar selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
+      <Sidebar setSelectedCategory={setSelectedCategory} />
       <Navbar />
 
       <div data-theme="light" className="pl-[20vw] pt-[9vh] !max-w-screen !h-screen box-border">
@@ -108,16 +117,16 @@ function Profile() {
 
           {/* User Info */}
           <div className='flex flex-col gap-6'>
-            <div className="text-3xl">
+            <div className="text-2xl">
               <span className="font-bold">Name: </span>{userData.firstName + " " + userData.lastName}
             </div>
-            <div className="text-3xl">
+            <div className="text-2xl">
               <span className="font-bold">School: </span>{userData.university}
             </div>
-            <div className="text-3xl">
+            <div className="text-2xl">
               <span className="font-bold">Email: </span>{userData.email}
             </div>
-            <div className="text-3xl">
+            <div className="text-2xl">
               <span className="font-bold">Password: </span>******
             </div>
           </div>
