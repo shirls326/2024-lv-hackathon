@@ -22,7 +22,7 @@ function Messages() {
                   </div>
                 </div>
                 <div className="flex-1">
-                  <h3 className="font-bold">John Doe</h3>
+                  <h3 className="font-bold">Tyler Drew</h3>
                   <p className="text-sm text-gray-500">Hey, is the item still available?</p>
                 </div>
               </div>
