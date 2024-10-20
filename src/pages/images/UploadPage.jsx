@@ -6,7 +6,7 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { ref, onValue } from 'firebase/database';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { db } from '../../firebase/config';
-import DisplayResult from '../../components/DisplayResult';
+import DisplayResults from '../../components/DisplayResults';
 
 const UploadPage = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -115,7 +115,7 @@ const UploadPage = () => {
         {uploading ? 'Uploading...' : 'Upload'}
       </button>
       {uploadSuccess && <p>Upload successful! Checking the results...</p>}
-      {checkResults && <DisplayResult />}
+      {checkResults && <DisplayResults />}
     </div>
   );
 };
