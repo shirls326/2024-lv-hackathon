@@ -101,7 +101,8 @@ function SignUp() {
         firstName,
         lastName,
         verfied: false,
-        uniID: uniID
+        uniID: uniID,
+        university: uni
       });
 
       navigate('/qr');

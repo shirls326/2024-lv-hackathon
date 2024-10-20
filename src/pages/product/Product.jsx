@@ -133,9 +133,9 @@ function Product() {
               <p className="text-sm mt-2">
                 <span className="font-semibold">Condition: </span>{capitalizeFirstLetterOfEachWord(product.condition)}
               </p>
-              <p className="text-sm">
+              {/* <p className="text-sm">
                 <span className="font-semibold">Color: </span>{capitalizeFirstLetterOfEachWord(product.color)}
-              </p>
+              </p> */}
               <p className="text-sm">
                 <span className="font-semibold">Date Posted: </span>{formatDate(product.created)}
               </p>
