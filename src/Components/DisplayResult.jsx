@@ -1,6 +1,7 @@
 // DisplayResultComponent.jsx (for PC view)
 import { useEffect, useState } from 'react';
-import { ref, get, update } from 'firebase/database';import { db } from '../firebase/config'; // Adjust the path as needed
+import { ref, get, update } from 'firebase/database';
+import { db } from '../firebase/config'; // Adjust the path as needed
 
 const DisplayResultComponent = () => {
     const [result, setResult] = useState(null);
