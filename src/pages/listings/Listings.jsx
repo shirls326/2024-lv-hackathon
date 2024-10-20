@@ -55,35 +55,23 @@ function Listings() {
         <div className='listingsGrid'>
           <CardListing />
           <CardListing />
-
-          <CardListing />
-
-          <CardListing />
-
           <CardListing />
           <CardListing />
           <CardListing />
-
-          <CardListing />
-
-          <CardListing />
-
           <CardListing />
           <CardListing />
           <CardListing />
-
-          <CardListing />
-
-          <CardListing />
-
           <CardListing />
           <CardListing />
           <CardListing />
-
           <CardListing />
-
           <CardListing />
-
+          <CardListing />
+          <CardListing />
+          <CardListing />
+          <CardListing />
+          <CardListing />
+          <CardListing />
           <CardListing />
           
         </div>

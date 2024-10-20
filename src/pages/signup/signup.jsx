@@ -99,7 +99,8 @@ function SignUp() {
       await set(usersRef, {
         email: user.email,
         firstName,
-        lastName
+        lastName,
+        verfied: false
       });
 
       navigate('/qr');
