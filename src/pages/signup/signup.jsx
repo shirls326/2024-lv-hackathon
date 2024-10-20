@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, db } from '../../firebase/config';
 import { ref, set } from 'firebase/database';
 import GradientSVG from '/login_gradient.svg?url';
@@ -91,7 +91,8 @@ function SignUp() {
       await set(usersRef, {
         email: user.email,
         firstName,
-        lastName
+        lastName,
+        verfied: false
       });
 
       navigate('/qr');
