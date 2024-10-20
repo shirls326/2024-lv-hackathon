@@ -4,7 +4,19 @@ import './css/cardListing.css';
 function cardListing() {
 return (
     <div className="ad-container">
+        <div className='adImg'>
+            <img src= 'https://via.placeholder.com/150' alt="listing image"/>   
+            
+            
+        </div>
+
+        <div className='adInfo'> 
+            <h4>ITEM LISTING</h4>
+            <p>$XXX.XX</p>
+        </div>
         
+        
+
         {/* <img 
             src='https://via.placeholder.com/150'
             alt="Kitchen Aid Mixer"

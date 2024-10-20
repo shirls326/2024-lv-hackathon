@@ -28,6 +28,9 @@
     overflow-x: hidden;
     
     .listingsGrid {
+        padding-left: 2.6vw;
+        padding-right: 2.6vw;
+
         z-index: -1;
         overflow-x: hidden;
         
