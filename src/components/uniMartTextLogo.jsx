@@ -1,9 +1,9 @@
 import React from 'react'
 import './css/uniMartTextLogo.css'
 
-function uniMartTextLogo() {
+function uniMartTextLogo(props) {
   return (
-    <div className='uniMartTextLogo'><span className='uni'>Uni</span>Mart</div>
+    <div className={props.className ? props.className + ' uniMartTextLogo' : 'uniMartTextLogo'}><span className='uni'>Uni</span>Mart</div>
   )
 }
 
