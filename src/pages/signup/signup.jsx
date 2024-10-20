@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, db } from '../../firebase/config';
 import { ref, set } from 'firebase/database';
 import GradientSVG from '/login_gradient.svg?url';
@@ -18,6 +18,7 @@ function SignUp() {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [uni, setUni] = useState('');
+  const [uniID, setUniID] = useState();
   const [theme, setTheme] = useState('light');
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -63,6 +64,13 @@ function SignUp() {
     const val = event.target.value;
     if (val) {
       setUni(val);
+    }
+  }
+  const handleUniIDChange = (event) => {
+    event.preventDefault();
+    const val = event.target.value;
+    if (val) {
+      setUniID(val);
     }
   }
 
@@ -127,7 +135,7 @@ function SignUp() {
       <div className='flex flex-col justify-center w-full h-screen mx-[7rem] gap-[0.5rem]'>
         <h1 className='mx-auto font-thin'>Sign Up</h1>
         <div className='flex flex-row justify-between'>
-          <div className=''>
+          <div>
             <InputTitle>First Name</InputTitle>
             <label className="input input-bordered flex items-center gap-2 border-2 border-[#717171] bg-[#f8f8f8]">
               <input type="text" className="grow" onChange={handleFirstNameChange} />
@@ -163,11 +171,19 @@ function SignUp() {
           </label>
         </div>
 
-        <div>
-          <InputTitle>University</InputTitle>
-          <label className="input input-bordered flex items-center gap-2 border-2 border-[#717171] bg-[#f8f8f8]">
-            <input type="text" className="grow" onChange={handleUniChange} />
-          </label>
+        <div className='flex flex-row justify-between'>
+          <div>
+            <InputTitle>University</InputTitle>
+            <label className="input input-bordered flex items-center gap-2 border-2 border-[#717171] bg-[#f8f8f8]">
+              <input type="text" className="grow" onChange={handleUniChange} />
+            </label>
+          </div>
+          <div>
+            <InputTitle>University ID</InputTitle>
+            <label className="input input-bordered flex items-center gap-2 border-2 border-[#717171] bg-[#f8f8f8]">
+              <input type="text" className="grow" onChange={handleUniIDChange} />
+            </label>
+          </div>
         </div>
 
         <button onClick={handleSignUp} className='btn btn-success mt-3'>Sign Up</button>
