@@ -7,6 +7,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 // Components
 import Navbar from '../../components/Navbar';
 import Sidebar from '../../components/Sidebar';
+import CardListing from '../../components/cardListing';
 // Icon
 import EditSVG from '/edit_icon.svg?url';
 import LoadingSkeleton from '../../components/LoadingSkeleton';
@@ -47,9 +48,9 @@ function Profile() {
     try {
       const snapshot = await get(userProductQuery); // Fetch the snapshot
       if (snapshot.exists()) {
-        const data = Object.values(snapshot.val())[0];
+        const data = Object.values(snapshot.val());
+        console.log("Products found: ", data);
         setUserProducts(data);
-        console.log("Data found: ", data);
       } else {
         console.log("No products found with the userID:", userID);
       }
@@ -72,6 +73,9 @@ function Profile() {
         setUserDataLoading(false);
         setProductDataLoading(false);
         console.log("No user is logged in.");
+        
+        // force login
+        navigate('/login');
       }
     });
 
@@ -128,10 +132,12 @@ function Profile() {
 
         {/* 'My Products' Section */}
         <div className=" h-[60%] box-border bg-base-200 p-2 rounded-lg">
-          <h2 className="text-2xl font-semibold mb-4">My Products</h2>
-          <div className="grid grid-cols-2 gap-4">
+          <h2 className="text-2xl font-semibold mb-4 ml-8">My Products</h2>
+          <div className="px-[2.6vw] relative grid grid-cols-4 gap-4 max-w-full items-center overflow-y-scroll justify-items-center">
 
-            {userProducts && userProducts.length > 0 && userProducts.map((prod, index) => (
+            {userProducts && userProducts.length > 0 && userProducts.map((prod, index) => 
+            <CardListing key={index} imgSrc={prod.imgSrc} name={prod.name} desc={prod.name} /> )
+            /* (
               <div key={`prod_${index}`} className="card card-compact bg-base-100 shadow-md">
                 <figure>
                   <img src={prod.imgSrc} alt="High Chair" />
@@ -141,7 +147,8 @@ function Profile() {
                   <p>{prod.price}</p>
                 </div>
               </div>
-            ))}
+            )) */
+            }
           </div>
         </div>
 
@@ -171,8 +178,6 @@ const TextInput = ({ children, getter, setter }) => {
 }
 
 function EditProfileModal({ userData }) {
-  console.log(userData);
-
   const [firstName, setFirstName] = useState(userData.firstName);
   const [lastName, setLastName] = useState(userData.lastName);
 
@@ -196,7 +201,6 @@ function EditProfileModal({ userData }) {
   }
 
   return <>
-    <button className="btn" ></button>
     <dialog id="edit_profile_modal" className="modal">
       <div className="modal-box">
         <form method="dialog">
