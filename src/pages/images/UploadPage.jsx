@@ -98,23 +98,32 @@ const UploadPage = () => {
   // If user is verified, redirect or show message
   if (userVerified) {
     return (
-      <div>
-        <h2>You are already verified!</h2>
-        <p>No need to upload your ID card again.</p>
-        <button onClick={() => navigate('/products')}>Continue to Products</button>
+      <div className="flex flex-col items-center justify-center min-h-screen p-4">
+        <h2 className="text-2xl font-bold text-center mb-4">You are already verified!</h2>
+        <p className="text-center mb-6">No need to upload your ID card again.</p>
+        <button className="btn btn-primary" onClick={() => navigate('/products')}>Continue to Products</button>
       </div>
     );
   }
 
   return (
-    <div>
-      <h2>Upload Your ID Card</h2>
-      {error && <p>{error}</p>}
-      <input type="file" accept="image/*" onChange={handleFileChange} />
-      <button onClick={handleUpload} disabled={!selectedFile || uploading}>
+    <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-100">
+      <h2 className="text-2xl font-bold text-center mb-4">Upload Your ID Card</h2>
+      {error && <p className="text-red-500 mb-4">{error}</p>}
+      <input
+        type="file"
+        accept="image/*"
+        onChange={handleFileChange}
+        className="file-input file-input-bordered w-full max-w-xs mb-4"
+      />
+      <button
+        className={`btn w-full max-w-xs ${uploading ? 'btn-disabled' : 'btn-primary'}`}
+        onClick={handleUpload}
+        disabled={!selectedFile || uploading}
+      >
         {uploading ? 'Uploading...' : 'Upload'}
       </button>
-      {uploadSuccess && <p>Upload successful! Checking the results...</p>}
+      {uploadSuccess && <p className="text-green-500 mt-4">Upload successful! Checking the results...</p>}
       {checkResults && <DisplayResults />}
     </div>
   );
