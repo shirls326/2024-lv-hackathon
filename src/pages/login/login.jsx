@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import GradientSVG from '/login_gradient.svg?url';
+import GradientSVG from '../../assets/login_gradient.svg';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate, useLocation } from 'react-router';
 import { auth, db } from '../../firebase/config';

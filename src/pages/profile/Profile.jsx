@@ -8,7 +8,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import Navbar from '../../components/Navbar';
 import Sidebar from '../../components/Sidebar';
 // Icon
-import EditSVG from '/edit_icon.svg?url';
+import EditSVG from '../../assets/edit_icon.svg';
 import LoadingSkeleton from '../../components/LoadingSkeleton';
 import placeholder from '../../assets/product_placeholder.svg';
 
