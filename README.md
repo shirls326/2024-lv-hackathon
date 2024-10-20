@@ -1,8 +1,39 @@
-# React + Vite
+# UniMart
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Live Site: https://main.d3aob9rra6qg0y.amplifyapp.com/
 
-Currently, two official plugins are available:
+## Project Goal
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+UniMart is a university-only platform where students buy, sell, and donate items, reducing waste and promoting sustainability. It offers products with a focus on safety, community, and convenience.
+
+## Stack
+
+- **AWS Services:** Amplify, S3, Lambda, API Gateway, Rekognition, DynamoDB
+- **Frontend:** React, Vite
+- **Backend:** Node.js
+- **Database:** Firebase Realtime Database
+- **Styling:** Tailwind CSS, DaisyUI
+
+## How to Run Locally
+
+1. **Clone the repository:**
+    ```bash
+    git clone https://github.com/yourusername/unimart.git
+    cd unimart
+    ```
+
+2. **Install dependencies:**
+    ```bash
+    npm install
+    ```
+
+3. **Run the development server:**
+    ```bash
+    npm run dev
+    ```
+
+4. **Open your browser and navigate to:**
+    ```
+    http://localhost:5173
+    ```
+
