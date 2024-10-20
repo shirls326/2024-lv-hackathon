@@ -1,21 +1,22 @@
 import React from 'react';
 import './css/cardListing.css';
+import { useNavigate } from 'react-router';
 
-function cardListing() {
-return (
-    <div className="ad-container">
-        
-        {/* <img 
-            src='https://via.placeholder.com/150'
-            alt="Kitchen Aid Mixer"
-            className="ad-image"
-        />
-        <div className="ad-overlay">
-            <h2>Kitchen Aid Mixer</h2>
-            <p className="ad-price">$25</p>
-        </div> */}
+function cardListing({ id, imgSrc, name, price }) {
+  const navigate = useNavigate();
+
+  return (
+    <div className="ad-container" onClick={() => navigate('/products/' + id)}>
+      <div className='adImg'>
+        <img src={imgSrc ?? 'https://placehold.co/200x200'} alt="listing image" />
+      </div>
+
+      <div className='adInfo'>
+        <p>{name}</p>
+        <p className='price'>${parseFloat(price).toFixed(2)}</p>
+      </div>
     </div>
-);
+  );
 };
 
 export default cardListing;

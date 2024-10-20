@@ -24,7 +24,6 @@ function Listings() {
     onAuthStateChanged(auth, (user) => {
       console.log(user);
       if (user) {
-        setUserID(user.uid);
         fetchProducts();
       } else {
         navigate('/login');
@@ -38,6 +37,8 @@ function Listings() {
 
     onValue(productsRef, (snapshot) => {
       const data = snapshot.val();
+      console.log(data);
+      
       const products = [];
       for (let id in data) {
         products.push({ id, ...data[id] });
@@ -51,47 +52,12 @@ function Listings() {
       <NavBar />
       <Sidebar />
       <div className="listings Container">
-        <h1>New Listings!</h1>
+        <h1>RECENTLY ADDED</h1>
         <div className='listingsGrid'>
-          <CardListing />
-          <CardListing />
-          <CardListing />
-          <CardListing />
-          <CardListing />
-          <CardListing />
-          <CardListing />
-          <CardListing />
-          <CardListing />
-          <CardListing />
-          <CardListing />
-          <CardListing />
-          <CardListing />
-          <CardListing />
-          <CardListing />
-          <CardListing />
-          <CardListing />
-          <CardListing />
-          <CardListing />
-          <CardListing />
-          
+          {products.map(product => (
+            <CardListing key={product.id} id={product.id} imgSrc={product.imgSrc} name={product.name} price={product.price} />
+          ))}
         </div>
-       
-
-        
-
-
-        
-
-
-        {products.map(product => (
-          <div key={product.id} className="product">
-            <h2>{product.name}</h2>
-            <p>{product.desc}</p>
-            <p>{product.price}</p>
-          </div>
-        ))}
-
-        
       </div>
     </>
   )
