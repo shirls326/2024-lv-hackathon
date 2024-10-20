@@ -53,8 +53,9 @@ function Product() {
   }, [id]);
 
   useEffect(() => {
-    if (product && product.images && product.images.length > 0) {
-      setPreviewImg(product.images[0]);
+    if (product && product.imgSrc && product.imgSrc.length > 0) {
+      // setPreviewImg(product.images[0]);
+      setPreviewImg(product.imgSrc)
     }
   }, [product]);
 
@@ -63,10 +64,10 @@ function Product() {
     navigate('/products');
   }
 
-  const handleChangeImgPreview = (event, index) => {
-    event.preventDefault();
-    setPreviewImg(product.images[index]);
-  }
+  // const handleChangeImgPreview = (event, index) => {
+  //   event.preventDefault();
+  //   setPreviewImg(product.imgSrc[index]);
+  // }
 
   if (!userID) {
     navigate('/login');
@@ -84,7 +85,7 @@ function Product() {
 
         <div className="flex flex-wrap lg:flex-nowrap gap-8 mt-4">
           {/* Left Image Gallery */}
-          <div className="flex flex-col gap-4">
+          {/* <div className="flex flex-col gap-4">
             {product.images && product.images.map((img, index) => (
               <div
                 key={`Image #${index}`}
@@ -98,11 +99,11 @@ function Product() {
                 />
               </div>
             ))}
-          </div>
+          </div> */}
 
           {/* Main Image */}
           <div className="flex-grow border border-gray-300 rounded-lg overflow-hidden">
-            {product.images && product.images.length > 0 &&
+            {product.imgSrc && product.imgSrc.length > 0 &&
               <img
                 src={previewImg}
                 alt="Main Product Image"
