@@ -55,7 +55,7 @@ function Listings() {
         <h1>RECENTLY ADDED</h1>
         <div className='listingsGrid'>
           {products.map(product => (
-            <CardListing key={product.id} imgSrc={product.imgSrc} name={product.name} price={product.price} />
+            <CardListing key={product.id} id={product.id} imgSrc={product.imgSrc} name={product.name} price={product.price} />
           ))}
         </div>
       </div>

@@ -1,9 +1,12 @@
 import React from 'react';
 import './css/cardListing.css';
+import { useNavigate } from 'react-router';
 
-function cardListing({ imgSrc, name, price }) {
+function cardListing({ id, imgSrc, name, price }) {
+  const navigate = useNavigate();
+
   return (
-    <div className="ad-container">
+    <div className="ad-container" onClick={() => navigate('/products/' + id)}>
       <div className='adImg'>
         <img src={imgSrc ?? 'https://placehold.co/200x200'} alt="listing image" />
       </div>
