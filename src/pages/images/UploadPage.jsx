@@ -3,6 +3,9 @@ import { useState, useEffect } from 'react';
 import { s3 } from '../../Config/awsConfig';
 import { PutObjectCommand } from '@aws-sdk/client-s3';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { ref, onValue } from 'firebase/database';
+import { useNavigate } from 'react-router-dom';
+import { db } from '../../firebase/config';
 import DisplayResult from '../../Components/DisplayResult';
 
 const UploadPage = () => {
@@ -11,20 +14,38 @@ const UploadPage = () => {
     const [uploadSuccess, setUploadSuccess] = useState(false);
     const [checkResults, setCheckResults] = useState(false);
     const [userUid, setUserUid] = useState(null);
+    const [userVerified, setUserVerified] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const auth = getAuth();
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
+        const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
             if (user) {
                 setUserUid(user.uid);
+
+                const userRef = ref(db, 'users/' + user.uid);
+                const unsubscribeUser = onValue(userRef, (snapshot) => {
+                    const data = snapshot.val();
+                    if (data) {
+                        setUserVerified(data.verified);
+                        if (data.verified) {
+                            // Redirect to /products if already verified
+                            navigate('/products');
+                        }
+                    } else {
+                        console.error('User data not found in Firebase.');
+                    }
+                });
+
+                return () => unsubscribeUser();
             } else {
                 console.error('No user is currently signed in.');
                 // Redirect to login page or show a message
             }
         });
 
-        return () => unsubscribe();
-    }, []);
+        return () => unsubscribeAuth();
+    }, [navigate]);
 
     const handleFileChange = (event) => {
         setSelectedFile(event.target.files[0]);
