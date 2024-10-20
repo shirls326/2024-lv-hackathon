@@ -17,34 +17,45 @@ function Listings() {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [userSavedListings, setUserSavedListings] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     // Ensure user is logged in
     onAuthStateChanged(auth, (user) => {
-      console.log(user);
       if (user) {
         fetchProducts();
+        fetchUserSavedListings(user.uid);
       } else {
         navigate('/login');
       }
     });
   }, []);
 
-  // Fetch products from firebase
+  // Fetch products from Firebase
   const fetchProducts = () => {
     const productsRef = ref(db, 'products');
-
     onValue(productsRef, (snapshot) => {
       const data = snapshot.val();
-      console.log(data);
-      
-      const products = [];
+      const productsArray = [];
       for (let id in data) {
-        products.push({ id, ...data[id] });
+        productsArray.push({ id, ...data[id] });
       }
-      setProducts(products);
-      setFilteredProducts(products); // Initialize with all products
+      setProducts(productsArray);
+      setFilteredProducts(productsArray); // Initialize with all products
+    });
+  };
+
+  // Fetch user's saved listings
+  const fetchUserSavedListings = (userId) => {
+    const savedRef = ref(db, `users/${userId}/saved`);
+    onValue(savedRef, (snapshot) => {
+      const savedListingsData = snapshot.val() || [];
+      // Convert the saved listings to an array if it's not already one
+      const savedListingsArray = Array.isArray(savedListingsData)
+        ? savedListingsData
+        : Object.keys(savedListingsData);
+      setUserSavedListings(savedListingsArray);
     });
   };
 
@@ -52,12 +63,18 @@ function Listings() {
   useEffect(() => {
     if (selectedCategory === 'All') {
       setFilteredProducts(products);
+    } else if (selectedCategory === 'Saved') {
+      // Filter to only show saved listings
+      setFilteredProducts(
+        products.filter(product => userSavedListings.includes(product.id))
+      );
     } else {
+      // Filter products by the selected category
       setFilteredProducts(
         products.filter(product => product.tags && product.tags.includes(selectedCategory))
       );
     }
-  }, [selectedCategory, products]);
+  }, [selectedCategory, products, userSavedListings]);
 
   return (
     <>
