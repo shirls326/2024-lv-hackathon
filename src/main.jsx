@@ -16,6 +16,7 @@ import Listings from './pages/listings/Listings';
 import Product from './pages/product/Product';
 import NewProduct from './pages/newproduct/NewProduct';
 import NotFound from './pages/404/NotFound';
+import Messages from './pages/messages/messages';
 
 // styles
 import './index.css'
@@ -34,6 +35,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/products" element={<Listings />} />
         <Route path="/products/:id" element={<Product />} />
         <Route path="/newproduct/" element={<NewProduct />} />
+        <Route path="/messages" element={<Messages />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
