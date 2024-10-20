@@ -140,11 +140,11 @@ function SignUp() {
 
   return (
     <div data-theme={theme} className='flex justify-between items-center max-h-screen w-screen bg-white'>
-      <div className='h-screen w-screen min-w-1/2 flex flex-col justify-center items-center bg-[url("/src/assets/login_gradient.svg")] bg-cover bg-no-repeat'>        
+      <div className='h-screen w-screen lg:w-3/5 flex flex-col justify-center items-center bg-[url("/src/assets/login_gradient.svg")] bg-cover bg-no-repeat'>        
         <img src={Logo} alt='UniMart Logo' />
         <TextLogo className = 'signUpLogo' />
       </div>
-      <div className='flex flex-col justify-center w-full h-screen mx-[7rem] gap-[0.5rem]'>
+      <div className='flex flex-col justify-center w-full h-screen mx-[7rem] gap-[0.5rem] lg:w-2/5'>
         <h1 className='mx-auto font-thin'>Sign Up</h1>
         <div className='flex flex-row justify-between'>
           <div>
