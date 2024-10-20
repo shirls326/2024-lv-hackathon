@@ -123,7 +123,7 @@ const UploadPage = () => {
         <>
           <DisplayResults />
           <p className="text-center text-green-500 font-semibold mt-6">
-            Photo upload successful. You can close this window now!
+            Once your photo has been verified, You can close this window. 
           </p>
         </>
       )}
