@@ -29,14 +29,17 @@ function NewProduct() {
 
   // ensure user is logged in
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUserID(user.uid);
       } else {
         navigate('/login');
       }
     });
-  }, []);
+
+    // Cleanup the listener on unmount
+    return () => unsubscribe();
+  }, [navigate]);
 
   const handlePost = async e => {
     e.preventDefault();
@@ -67,7 +70,14 @@ function NewProduct() {
       }
 
       // create new product object
-      const newProduct = { name, desc, price: Number(price), imgSrc: image ? `https://${params.Bucket}.s3.amazonaws.com/${params.Key}` : null, created: new Date().toISOString() };
+      const newProduct = {
+        name,
+        desc,
+        price: Number(price),
+        imgSrc: image ? `https://${params.Bucket}.s3.amazonaws.com/${params.Key}` : null,
+        created: new Date().toISOString(),
+        seller: userID
+      };
 
       // add new product to firebase
       await set(newProductRef, newProduct);
