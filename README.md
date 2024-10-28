@@ -1,6 +1,6 @@
 # UniMart
 
-DevPost: https://devpost.com/software/unimart
+Devpost: https://devpost.com/software/unimart
 
 ## Project Goal
 
