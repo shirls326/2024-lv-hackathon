@@ -1,6 +1,6 @@
 # UniMart
 
-Live Site: https://main.d3aob9rra6qg0y.amplifyapp.com/
+DevPost: https://devpost.com/software/unimart
 
 ## Project Goal
 
